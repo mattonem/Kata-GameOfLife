@@ -1,0 +1,14 @@
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'KataGameOfLife',
+      #directory : '.', 
+      #platforms : [ #pharo ]
+    }
+  ],
+  #testing : {
+    #coverage : {
+      #categories : [ 'KataGameOfLife', 'KataGameOfLife-*' ]
+    }
+  }
+}
