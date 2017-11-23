@@ -5,9 +5,7 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [
-		"rows"
-	],
-	"name" : "GameOfLife",
+	"instvars" : [ ],
+	"name" : "GameOfLifeStatus",
 	"type" : "normal"
 }
