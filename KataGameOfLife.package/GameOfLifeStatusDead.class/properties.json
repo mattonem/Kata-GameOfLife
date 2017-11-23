@@ -1,13 +1,11 @@
 {
 	"commentStamp" : "",
-	"super" : "Object",
+	"super" : "GameOfLifeStatus",
 	"category" : "KataGameOfLife",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [
-		"rows"
-	],
-	"name" : "GameOfLife",
+	"instvars" : [ ],
+	"name" : "GameOfLifeStatusDead",
 	"type" : "normal"
 }

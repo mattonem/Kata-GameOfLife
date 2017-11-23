@@ -6,8 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"rows"
+		"cells"
 	],
-	"name" : "GameOfLife",
+	"name" : "GameOfLifeRow",
 	"type" : "normal"
 }
