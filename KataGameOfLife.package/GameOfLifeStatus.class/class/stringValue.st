@@ -1,0 +1,3 @@
+initialize
+stringValue
+	self subclassResponsibility
