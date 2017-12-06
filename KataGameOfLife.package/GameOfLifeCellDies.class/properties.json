@@ -1,14 +1,13 @@
 {
 	"commentStamp" : "",
-	"super" : "Object",
+	"super" : "Announcement",
 	"category" : "KataGameOfLife",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"status",
-		"announcer"
+		"cell"
 	],
-	"name" : "GameOfLifeCell",
+	"name" : "GameOfLifeCellDies",
 	"type" : "normal"
 }
