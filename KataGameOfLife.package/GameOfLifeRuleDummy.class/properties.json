@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "GameOfLifeRule",
+	"category" : "KataGameOfLife-Tests",
+	"classinstvars" : [
+		"triggered"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "GameOfLifeRuleDummy",
+	"type" : "normal"
+}
