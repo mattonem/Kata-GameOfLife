@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "KataGameOfLife",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"cell"
+	],
+	"name" : "GameOfLifeRule",
+	"type" : "normal"
+}
