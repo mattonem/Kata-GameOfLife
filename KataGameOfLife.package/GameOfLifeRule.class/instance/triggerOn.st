@@ -1,3 +1,3 @@
 as yet unclassified
 triggerOn
-	^ GameOfLifeCellGotBorn
+	self subclassResponsibility
