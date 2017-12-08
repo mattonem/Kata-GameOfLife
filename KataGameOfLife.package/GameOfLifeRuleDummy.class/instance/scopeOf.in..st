@@ -1,3 +1,3 @@
-as yet unclassified
+accessing
 scopeOf: aGameOfLifeCell in: aGameOfLife 
 	^ {aGameOfLifeCell}

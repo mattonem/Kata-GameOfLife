@@ -7,7 +7,9 @@
 	],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"triggered"
+	],
 	"name" : "GameOfLifeRuleDummy",
 	"type" : "normal"
 }
