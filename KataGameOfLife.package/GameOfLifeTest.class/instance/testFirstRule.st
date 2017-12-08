@@ -1,11 +1,16 @@
 tests
 testFirstRule
-	| gameOfLife |
+	| gameOfLife rule |
 	gameOfLife := GameOfLife
 		newFromString:
 			'
 	|1|	'.
-	GameOfLifeRuleDummy triggered: false.
-	GameOfLifeRuleDummy applyOn: gameOfLife.
+	rule := GameOfLifeRuleDummy new triggered: false; yourself.
+	gameOfLife addRule: rule.
 	gameOfLife cellsDo: [ :aCell | aCell getBorn ].
-	self assert: GameOfLifeRuleDummy triggered.
+	self assert: rule triggered.
+	rule triggered: false.
+	gameOfLife removeRule: rule.
+	gameOfLife cellsDo: [ :aCell | aCell getBorn ].
+	self assert: rule triggered not.
+		
