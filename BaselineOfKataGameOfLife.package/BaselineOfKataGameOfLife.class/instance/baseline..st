@@ -9,5 +9,5 @@ baseline: spec
 			spec
 				baseline: 'Talent'
 				with: [ spec
-						repository: 'github://mattonem/pharo-talents:patch-1/mc';
+						repository: 'github://tesonep/pharo-talents/';
 						loads: 'default' ] ]
