@@ -8,7 +8,7 @@ baseline: spec
 				baseline: 'Talents'
 				with: [ spec
 						repository: 'github://tesonep/pharo-talents/';
-						loads:  #'default' ].
+						loads:  #'test' ].
 		spec
 				package: 'KataGameOfLife';
 				yourself. ]
