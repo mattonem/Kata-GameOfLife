@@ -5,7 +5,7 @@ baseline: spec
 		for: #common
 		do: [ 
 		spec
-				baseline: 'Talent'
+				baseline: 'Talents'
 				with: [ spec
 						repository: 'github://tesonep/pharo-talents/';
 						loads: 'default' ].
