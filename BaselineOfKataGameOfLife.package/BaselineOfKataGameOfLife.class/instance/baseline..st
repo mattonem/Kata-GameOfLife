@@ -1,6 +1,7 @@
 baselines
 baseline: spec
 	<baseline>
+	Iceberg enableMetacelloIntegration: true.
 	spec
 		for: #common
 		do: [ 
