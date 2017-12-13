@@ -1,0 +1,3 @@
+accessing
+composition
+	^ TaEmptyComposition new.

@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "",
+	"super" : "T2Trait",
+	"category" : "KataGameOfLife",
+	"classinstvars" : [
+		"myMethodDict",
+		"composition"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"count"
+	],
+	"name" : "GameOfLifeNeighborgsTalent",
+	"type" : "normal"
+}
