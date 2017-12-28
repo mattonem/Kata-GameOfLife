@@ -1,6 +1,7 @@
 initialize
-addRowFromString: aString 
-
+addRowFromString: aString
 	| aRow |
 	aRow := rows add: GameOfLifeRow new.
-	(aString findTokens: $|) do: [ :aCell | aCell trim ifNotEmpty: [ aRow addCellFromString: aCell ] ]
+	(aString findTokens: $|)
+		doWithIndex: [ :aCell :index| aCell trim ifNotEmpty: [ (aRow addCellFromString: aCell) initializeValue: (#x -> index) ] ].
+		
