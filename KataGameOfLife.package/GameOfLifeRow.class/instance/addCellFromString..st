@@ -1,3 +1,3 @@
 initialize
 addCellFromString: aString 
-	cells add: (GameOfLifeCell newFromString: aString)
+	^ cells add: (GameOfLifeCell newFromString: aString)

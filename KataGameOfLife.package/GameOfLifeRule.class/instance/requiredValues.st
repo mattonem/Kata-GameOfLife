@@ -1,3 +1,3 @@
 accessing
 requiredValues
-	^ #()
+	self subclassResponsibility 

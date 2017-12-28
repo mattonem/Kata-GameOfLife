@@ -13,4 +13,4 @@ testFirstRule
 	gameOfLife removeRule: rule.
 	gameOfLife cellsDo: [ :aCell | aCell getBorn ].
 	self assert: rule triggered not.
-		
+	gameOfLife cellsDo: [ :aCell | self assert: (aCell valueAt:#testvalue) equals: 0 ].

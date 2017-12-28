@@ -1,3 +1,3 @@
 as yet unclassified
 initializeValues: aCollection 
-	aCollection do:[:anAssociation | self initializeValue: anAssociation]
+	aCollection associationsDo: [:anAssociation | self initializeValue: anAssociation]
