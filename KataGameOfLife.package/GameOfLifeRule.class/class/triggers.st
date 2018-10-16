@@ -1,0 +1,3 @@
+installation
+triggers
+	self subclassResponsibility
