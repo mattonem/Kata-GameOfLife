@@ -1,3 +1,3 @@
 SystemOrganization addCategory: #KataGameOfLife!
-SystemOrganization addCategory: #'KataGameOfLife-Tests'!
-SystemOrganization addCategory: #'KataGameOfLife-announcement'!
+SystemOrganization addCategory: 'KataGameOfLife-Announcement'!
+SystemOrganization addCategory: 'KataGameOfLife-Tests'!

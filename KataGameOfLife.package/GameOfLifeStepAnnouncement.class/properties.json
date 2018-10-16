@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "Announcement",
-	"category" : "KataGameOfLife-announcement",
+	"category" : "KataGameOfLife-Announcement",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
