@@ -1,3 +1,3 @@
 installation
 triggers
-	^ GameOfLifeStepAnnouncement 
+	^ {GameOfLifeStepAnnouncement}
