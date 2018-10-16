@@ -1,5 +1,5 @@
 instantiation
-Announcement subclass: #GameOfLifeRule
+Object subclass: #GameOfLifeRule
 	instanceVariableNames: ''
 	classVariableNames: ''
 	package: 'KataGameOfLife'
