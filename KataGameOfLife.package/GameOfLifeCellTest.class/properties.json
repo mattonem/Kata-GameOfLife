@@ -1,11 +1,11 @@
 {
 	"commentStamp" : "",
-	"super" : "Object",
-	"category" : "KataGameOfLife",
+	"super" : "TestCase",
+	"category" : "KataGameOfLife-Tests",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "GameOfLifeRule",
+	"name" : "GameOfLifeCellTest",
 	"type" : "normal"
 }

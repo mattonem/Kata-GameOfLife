@@ -1,3 +1,3 @@
 instantiation
 ruleDeadlyLoneliness
-  ^ self shouldBeImplemented
+  ^ GameOfLifeRuleDeadlyLoneliness new

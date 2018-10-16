@@ -6,8 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"game"
+		"cell"
 	],
-	"name" : "GameOfLifeStepAnnouncement",
+	"name" : "GameOfLifeCellDieAnnouncement",
 	"type" : "normal"
 }
