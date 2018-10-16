@@ -1,3 +1,0 @@
-instantiation
-ruleDeadlyLoneliness
-  ^ GameOfLifeRuleDeadlyLoneliness new

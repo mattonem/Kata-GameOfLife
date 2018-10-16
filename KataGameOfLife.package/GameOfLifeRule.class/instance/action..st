@@ -1,0 +1,3 @@
+instance initalization
+action: announcement
+	self subclassResponsibility

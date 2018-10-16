@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "Announcement",
-	"category" : "KataGameOfLife-Tests",
+	"category" : "KataGameOfLife",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

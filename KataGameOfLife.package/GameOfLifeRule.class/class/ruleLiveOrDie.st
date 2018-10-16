@@ -1,0 +1,3 @@
+instantiation
+ruleLiveOrDie
+  ^ GameOfLifeRuleLiveOrDie new

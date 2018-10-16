@@ -1,3 +1,0 @@
-installation
-triggers
-	^ [ GameOfLifeStepAnnouncement ]

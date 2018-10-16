@@ -2,5 +2,5 @@ instance creation
 newFromString: aString
 	| inst |
 	inst := self new initializeFromString: aString.
-	inst cellDo: [ :aCell | GameOfLifeRule ruleDeadlyLoneliness on: aCell ].
+	inst cellDo: [ :aCell | GameOfLifeRule ruleLiveOrDie on: aCell ].
 	^ inst
