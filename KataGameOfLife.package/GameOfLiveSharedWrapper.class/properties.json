@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "KataGameOfLife",
+	"classinstvars" : [
+		"instanceDictionary"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"inst"
+	],
+	"name" : "GameOfLiveSharedWrapper",
+	"type" : "normal"
+}
