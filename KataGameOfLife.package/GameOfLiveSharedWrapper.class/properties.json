@@ -2,11 +2,11 @@
 	"commentStamp" : "",
 	"super" : "Object",
 	"category" : "KataGameOfLife",
-	"classinstvars" : [
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
 		"instanceDictionary"
 	],
-	"pools" : [ ],
-	"classvars" : [ ],
 	"instvars" : [
 		"inst"
 	],
