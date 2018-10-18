@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "GameOfLiveSharedWrapper",
+	"category" : "KataGameOfLife-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"neighbors"
+	],
+	"name" : "GameOfLiveHasNeighbors",
+	"type" : "normal"
+}
