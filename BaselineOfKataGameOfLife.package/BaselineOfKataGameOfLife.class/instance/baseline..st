@@ -4,5 +4,10 @@ baseline: spec
 	spec
 		for: #common
 		do: [ spec
+				baseline: 'Talents'
+				with: [ spec
+						repository: 'github://tesonep/pharo-talents/';
+						loads: #test ].
+			spec
 				package: 'KataGameOfLife';
 				yourself ]
