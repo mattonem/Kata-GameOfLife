@@ -1,4 +1,8 @@
 initialize
 die
-	status := GameOfLifeStatus dead.
-	announcer announce: (GameOfLifeCellDieAnnouncement new cell: self)
+	announcer
+		announce:
+			(GameOfLifeCellDies new
+				cell: self;
+				yourself)
+				

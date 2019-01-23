@@ -1,4 +1,6 @@
-initialize
+
+initialization
 initialize
 	super initialize.
-	announcer := Announcer new
+	announcer := Announcer new.
+	values := Dictionary new
