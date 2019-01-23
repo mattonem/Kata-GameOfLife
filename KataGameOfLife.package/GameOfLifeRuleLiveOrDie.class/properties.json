@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "GameOfLifeRule",
-	"category" : "KataGameOfLife",
+	"category" : "KataGameOfLife-Core",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
