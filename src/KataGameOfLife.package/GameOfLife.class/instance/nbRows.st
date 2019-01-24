@@ -1,3 +1,0 @@
-accessing
-nbRows
-	^ rows size
