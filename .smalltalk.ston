@@ -2,7 +2,7 @@ SmalltalkCISpec {
   #loading : [
     SCIMetacelloLoadSpec {
       #baseline : 'KataGameOfLife',
-      #directory : '.', 
+      #directory : 'src', 
       #platforms : [ #pharo ]
     }
   ],

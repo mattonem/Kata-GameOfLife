@@ -1,3 +1,0 @@
-accessing
-nbCells
-	^ cells size

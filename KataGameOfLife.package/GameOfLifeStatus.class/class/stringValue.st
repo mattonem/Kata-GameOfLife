@@ -1,3 +1,0 @@
-initialize
-stringValue
-	self subclassResponsibility
