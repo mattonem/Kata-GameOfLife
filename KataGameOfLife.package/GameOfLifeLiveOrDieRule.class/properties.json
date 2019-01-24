@@ -6,6 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "GameOfLifeNeighbourDeadCountRule",
+	"name" : "GameOfLifeLiveOrDieRule",
 	"type" : "normal"
 }

@@ -6,6 +6,5 @@ onString: aString
 			Character lf}) do: [ :aLine | aLine trim ifNotEmpty: [ self addRowFromString: aLine ] ].
 	rows
 		doWithIndex: [ :aRow :index | aRow cellsDo: [ :aCell | aCell initializeValue: #y -> index ] ].
-	self addRule: GameOfLifeNeighbourAliveCountRule new.
-	self addRule: GameOfLifeNeighbourDeadCountRule new.
+	self addRule: GameOfLifeLiveOrDieRule new.
 	^ self
