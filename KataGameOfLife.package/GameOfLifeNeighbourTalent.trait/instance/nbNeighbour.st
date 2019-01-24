@@ -1,0 +1,3 @@
+acessing
+nbNeighbour
+	^ neighbours size
