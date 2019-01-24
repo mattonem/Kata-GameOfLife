@@ -11,5 +11,5 @@ initializeOnCellGameOfLifeNeighbourTalent: aCell inBoard: inBoard
 			(inBoard rightDownOf: aCell).
 			(inBoard leftUpOf: aCell).
 			(inBoard leftDownOf: aCell)} asSet
-				remove: nil;
+				remove: nil ifAbsent: [];
 				yourself)
