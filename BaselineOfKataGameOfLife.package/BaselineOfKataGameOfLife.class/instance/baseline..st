@@ -10,4 +10,4 @@ baseline: spec
 						loads: #test ].
 			spec
 				package: 'KataGameOfLife';
-				yourself ]
+				package: 'KataGameOfLife-Tests' ]
