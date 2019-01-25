@@ -22,6 +22,7 @@ GameOfLifeRow >> cellsDo: aBlockClosure [
 	cells do: aBlockClosure
 ]
 
+{ #category : #'' }
 GameOfLifeRow >> cellsDoWithIndex: aBlockClosure [
   cells doWithIndex: aBlockClosure
 ]

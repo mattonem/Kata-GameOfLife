@@ -1,8 +1,8 @@
 Class {
 	#name : #GameOfLifeCell,
 	#superclass : #Object,
-	#traits : 'GoLAnnouncerTrait',
-	#classTraits : 'GoLAnnouncerTrait classTrait',
+	#traits : 'GoLAnnouncerTrait + GoLPositionnableTrait',
+	#classTraits : 'GoLAnnouncerTrait classTrait + GoLPositionnableTrait classTrait',
 	#instVars : [
 		'status'
 	],
@@ -42,7 +42,6 @@ GameOfLifeCell >> getBorn [
 				cell: self;
 				yourself)
 ]
-
 
 { #category : #testing }
 GameOfLifeCell >> isAlive [

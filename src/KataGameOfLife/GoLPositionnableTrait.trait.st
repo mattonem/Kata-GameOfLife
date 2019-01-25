@@ -7,16 +7,6 @@ Trait {
 }
 
 { #category : #accessing }
-GoLPositionnableTrait >> x [
-	 ^ position x
-]
-
-{ #category : #accessing }
-GoLPositionnableTrait >> y [
-	 ^ position y
-]
-
-{ #category : #accessing }
 GoLPositionnableTrait >> position [
 	 ^ position
 ]
@@ -24,4 +14,14 @@ GoLPositionnableTrait >> position [
 { #category : #accessing }
 GoLPositionnableTrait >> position: aPoint [
 	 ^ position := aPoint
+]
+
+{ #category : #accessing }
+GoLPositionnableTrait >> x [
+	 ^ position x
+]
+
+{ #category : #accessing }
+GoLPositionnableTrait >> y [
+	 ^ position y
 ]
