@@ -5,3 +5,9 @@ Trait {
 	],
 	#category : #KataGameOfLife
 }
+
+{ #category : #initialization }
+GoLAnnouncerTrait >> initialize [
+	super initialize.
+	announcer := Announcer new.
+]

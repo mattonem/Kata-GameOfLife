@@ -4,14 +4,13 @@ Class {
 	#traits : 'GoLAnnouncerTrait',
 	#classTraits : 'GoLAnnouncerTrait classTrait',
 	#instVars : [
-		'status',
-		'values'
+		'status'
 	],
 	#category : #KataGameOfLife
 }
 
 { #category : #'instance creation' }
-GameOfLifeCell class >> newFromString: aString [ 
+GameOfLifeCell class >> newFromString: aString [
 	^ self new fromString: aString
 ]
 
@@ -30,7 +29,7 @@ GameOfLifeCell >> die [
 ]
 
 { #category : #initialize }
-GameOfLifeCell >> fromString: aString [ 
+GameOfLifeCell >> fromString: aString [
 	status := GameOfLifeStatus fromString: aString.
 	^ self
 ]
@@ -44,17 +43,6 @@ GameOfLifeCell >> getBorn [
 				yourself)
 ]
 
-{ #category : #initialization }
-GameOfLifeCell >> initialize [
-	super initialize.
-	announcer := Announcer new.
-	values := Dictionary new
-]
-
-{ #category : #multivalues }
-GameOfLifeCell >> initializeValue: anAssociation [ 
-	values at: anAssociation key ifAbsentPut: anAssociation value
-]
 
 { #category : #testing }
 GameOfLifeCell >> isAlive [
@@ -65,9 +53,4 @@ GameOfLifeCell >> isAlive [
 GameOfLifeCell >> printOn: aStream [
 	status printOn: aStream .
 
-]
-
-{ #category : #multivalues }
-GameOfLifeCell >> valueAt: aString [ 
-	^ values at: aString
 ]
