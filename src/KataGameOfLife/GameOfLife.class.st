@@ -80,7 +80,7 @@ GameOfLife >> initialize [
 
 { #category : #accessign }
 GameOfLife >> leftDownOf: aGameOfLifeCell [
-	^ self downOf: ((self rightOf: aGameOfLifeCell) ifNil: [ ^ nil ])
+	^ self downOf: ((self leftOf: aGameOfLifeCell) ifNil: [ ^ nil ])
 ]
 
 { #category : #'as yet unclassified' }
