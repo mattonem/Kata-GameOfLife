@@ -1,12 +1,13 @@
 Class {
 	#name : #GameOfLifeCell,
 	#superclass : #Object,
+	#traits : 'GoLAnnouncerTrait',
+	#classTraits : 'GoLAnnouncerTrait classTrait',
 	#instVars : [
 		'status',
-		'announcer',
 		'values'
 	],
-	#category : 'KataGameOfLife'
+	#category : #KataGameOfLife
 }
 
 { #category : #'instance creation' }

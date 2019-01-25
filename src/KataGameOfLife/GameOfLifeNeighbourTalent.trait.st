@@ -2,9 +2,9 @@ Trait {
 	#name : #GameOfLifeNeighbourTalent,
 	#instVars : [
 		'neighbours',
-    'nbAliveCount'
+		'nbAliveCount'
 	],
-	#category : 'KataGameOfLife'
+	#category : #KataGameOfLife
 }
 
 { #category : #'as yet unclassified' }
