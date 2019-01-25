@@ -28,6 +28,14 @@ GameOfLifeNeighbourTalent >> initializeOnCellGameOfLifeNeighbourTalent: aCell in
 				remove: nil ifAbsent: [];
 				yourself).
   nbAliveCount := neighbours count: #isAlive.
+  neighbours do: [:aCell |
+    aCell announcer
+      when: GameOfLifeCellGotBorn
+      do: [ nbAliveCount := nbAliveCount + 1 ]].
+  neighbours do: [:aCell |
+    aCell announcer
+      when: GameOfLifeCellDies 
+      do: [ nbAliveCount := nbAliveCount - 1 ]].
 ]
 
 { #category : #initialization }
