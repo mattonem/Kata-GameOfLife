@@ -8,18 +8,23 @@ Class {
 }
 
 { #category : #initialize }
-GameOfLifeRow >> addCellFromString: aString [ 
+GameOfLifeRow >> addCellFromString: aString [
 	^ cells add: (GameOfLifeCell newFromString: aString)
 ]
 
 { #category : #accessing }
-GameOfLifeRow >> cellAt: anInteger [ 
+GameOfLifeRow >> cellAt: anInteger [
 	^ cells at: anInteger ifAbsent: [ ^ nil ]
 ]
 
 { #category : #'as yet unclassified' }
-GameOfLifeRow >> cellsDo: aBlockClosure [ 
+GameOfLifeRow >> cellsDo: aBlockClosure [
 	cells do: aBlockClosure
+]
+
+{ #category : #'' }
+GameOfLifeRow >> cellsDoWithIndex: aBlockClosure [
+  cells doWithIndex: aBlockClosure
 ]
 
 { #category : #initialize }

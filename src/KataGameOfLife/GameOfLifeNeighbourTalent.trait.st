@@ -2,9 +2,11 @@ Trait {
 	#name : #GameOfLifeNeighbourTalent,
 	#instVars : [
 		'neighbours',
-    'nbAliveCount'
+		'nbAliveCount'
 	],
-	#category : 'KataGameOfLife'
+	#traits : 'GoLAnnouncerTrait',
+	#classTraits : 'GoLAnnouncerTrait classTrait',
+	#category : #KataGameOfLife
 }
 
 { #category : #'as yet unclassified' }
@@ -31,11 +33,17 @@ GameOfLifeNeighbourTalent >> initializeOnCellGameOfLifeNeighbourTalent: aCell in
   neighbours do: [:aCell |
     aCell announcer
       when: GameOfLifeCellGotBorn
-      do: [ nbAliveCount := nbAliveCount + 1 ]].
+      do: [ nbAliveCount := nbAliveCount + 1.
+        announcer announce: (GoLNeighbourChangeAnnouncement new
+          cell: self;
+          yourself) ]].
   neighbours do: [:aCell |
     aCell announcer
-      when: GameOfLifeCellDies 
-      do: [ nbAliveCount := nbAliveCount - 1 ]].
+      when: GameOfLifeCellDies
+      do: [ nbAliveCount := nbAliveCount - 1.
+        announcer announce: (GoLNeighbourChangeAnnouncement new
+          cell: self;
+          yourself) ]].
 ]
 
 { #category : #initialization }

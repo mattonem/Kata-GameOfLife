@@ -21,7 +21,7 @@ GameOfLife >> addRowFromString: aString [
 	| aRow |
 	aRow := rows add: GameOfLifeRow new.
 	(aString findTokens: $|)
-		doWithIndex: [ :aCell :index| aCell trim ifNotEmpty: [ (aRow addCellFromString: aCell) initializeValue: (#x -> index) ] ].
+		doWithIndex: [ :aCell :index| aCell trim ifNotEmpty: [ aRow addCellFromString: aCell ] ].
 
 ]
 
@@ -102,13 +102,13 @@ GameOfLife >> onString: aString [
 			{Character cr.
 			Character lf}) do: [ :aLine | aLine trim ifNotEmpty: [ self addRowFromString: aLine ] ].
 	rows
-		doWithIndex: [ :aRow :index | aRow cellsDo: [ :aCell | aCell initializeValue: #y -> index ] ].
+		doWithIndex: [ :aRow :rowIndex | aRow cellsDoWithIndex: [ :aCell :colIndex | aCell position: (rowIndex @ colIndex) ] ].
 	^ self
 ]
 
 { #category : #accessing }
 GameOfLife >> positionOf: aGameOfLifeCell [
-	^ (aGameOfLifeCell valueAt: #y) @ (aGameOfLifeCell valueAt: #y)
+	^ aGameOfLifeCell position
 ]
 
 { #category : #accessing }
