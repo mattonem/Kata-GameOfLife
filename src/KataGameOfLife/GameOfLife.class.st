@@ -9,8 +9,11 @@ Class {
 }
 
 { #category : #'instance creation' }
-GameOfLife class >> newFromString: aString [ 
-	^ self new onString: aString
+GameOfLife class >> newFromString: aString [
+  | inst |
+  inst := self new onString: aString.
+  inst addRule: GameOfLifeLiveOrDieRule new.
+  ^ inst
 ]
 
 { #category : #initialize }
@@ -19,38 +22,38 @@ GameOfLife >> addRowFromString: aString [
 	aRow := rows add: GameOfLifeRow new.
 	(aString findTokens: $|)
 		doWithIndex: [ :aCell :index| aCell trim ifNotEmpty: [ (aRow addCellFromString: aCell) initializeValue: (#x -> index) ] ].
-		
+
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialize }
 GameOfLife >> addRule: aGameOfLifeRule [
 	aGameOfLifeRule requiredTalents
-		do: [ :aTalent | 
+		do: [ :aTalent |
 			self
-				cellsDo: [ :aCell | 
+				cellsDo: [ :aCell |
 					[ aCell addTalent: aTalent.
 					aCell
 						perform: ('initializeOnCell' , aTalent name , ':inBoard:') asSymbol
 						with: aCell
 						with: self ]
 						on: Error
-						do: [ :e | 
+						do: [ :e |
 							e messageText = 'Could not include the same traits twice'
 								ifFalse: [ e signal ] ] ] ]
 ]
 
 { #category : #accessing }
-GameOfLife >> cellAt: aPoint [ 
-	^ (rows at: aPoint x ifAbsent: [^ nil]) cellAt: aPoint y 
+GameOfLife >> cellAt: aPoint [
+	^ (rows at: aPoint x ifAbsent: [^ nil]) cellAt: aPoint y
 ]
 
 { #category : #'as yet unclassified' }
-GameOfLife >> cellsDo: aBlockClosure [ 
-	rows do: [ :aRow | aRow cellsDo: aBlockClosure ] 
+GameOfLife >> cellsDo: aBlockClosure [
+	rows do: [ :aRow | aRow cellsDo: aBlockClosure ]
 ]
 
 { #category : #accessing }
-GameOfLife >> downOf: aGameOfLifeCell [ 
+GameOfLife >> downOf: aGameOfLifeCell [
 	^ self cellAt: (self positionOf: aGameOfLifeCell) + (1@0)
 ]
 
@@ -63,17 +66,17 @@ GameOfLife >> initialize [
 ]
 
 { #category : #accessign }
-GameOfLife >> leftDownOf: aGameOfLifeCell [ 
+GameOfLife >> leftDownOf: aGameOfLifeCell [
 	^ self downOf: ((self rightOf: aGameOfLifeCell) ifNil: [ ^ nil ])
 ]
 
 { #category : #'as yet unclassified' }
-GameOfLife >> leftOf: aGameOfLifeCell [ 
+GameOfLife >> leftOf: aGameOfLifeCell [
 	^ self cellAt: (self positionOf: aGameOfLifeCell) + (0@(-1))
 ]
 
 { #category : #'as yet unclassified' }
-GameOfLife >> leftUpOf: aGameOfLifeCell [ 
+GameOfLife >> leftUpOf: aGameOfLifeCell [
 	^ self upOf: ((self leftOf: aGameOfLifeCell) ifNil: [ ^ nil ])
 ]
 
@@ -100,35 +103,34 @@ GameOfLife >> onString: aString [
 			Character lf}) do: [ :aLine | aLine trim ifNotEmpty: [ self addRowFromString: aLine ] ].
 	rows
 		doWithIndex: [ :aRow :index | aRow cellsDo: [ :aCell | aCell initializeValue: #y -> index ] ].
-	self addRule: GameOfLifeLiveOrDieRule new.
 	^ self
 ]
 
 { #category : #accessing }
-GameOfLife >> positionOf: aGameOfLifeCell [ 
+GameOfLife >> positionOf: aGameOfLifeCell [
 	^ (aGameOfLifeCell valueAt: #y) @ (aGameOfLifeCell valueAt: #y)
 ]
 
 { #category : #accessing }
 GameOfLife >> printOn: aStream [
-	rows do: [ :aRow | 
+	rows do: [ :aRow |
 		aRow printOn: aStream.
 		aStream << Character cr.]
 
 ]
 
 { #category : #accessing }
-GameOfLife >> rightDownOf: aGameOfLifeCell [ 
+GameOfLife >> rightDownOf: aGameOfLifeCell [
 	^ self downOf: ((self rightOf: aGameOfLifeCell) ifNil: [ ^ nil ])
 ]
 
 { #category : #accessing }
-GameOfLife >> rightOf: aGameOfLifeCell [ 
+GameOfLife >> rightOf: aGameOfLifeCell [
 	^ self cellAt: (self positionOf: aGameOfLifeCell) + (0@1)
 ]
 
 { #category : #accessing }
-GameOfLife >> rightUpOf: aGameOfLifeCell [ 
+GameOfLife >> rightUpOf: aGameOfLifeCell [
 	^ self upOf: ((self rightOf: aGameOfLifeCell) ifNil: [ ^ nil ])
 ]
 
@@ -138,6 +140,6 @@ GameOfLife >> step [
 ]
 
 { #category : #accessing }
-GameOfLife >> upOf: aGameOfLifeCell [ 
+GameOfLife >> upOf: aGameOfLifeCell [
 	^ self cellAt: (self positionOf: aGameOfLifeCell) + (-1@0)
 ]
