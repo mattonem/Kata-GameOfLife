@@ -9,7 +9,12 @@ GameOfLifeStatusAlive class >> stringValue [
 	^ '1'
 ]
 
+{ #category : #testing }
+GameOfLifeStatusAlive >> isAlive [
+	^ true
+]
+
 { #category : #printing }
-GameOfLifeStatusAlive >> printOn: aStream [ 
+GameOfLifeStatusAlive >> printOn: aStream [
 	aStream << $1
 ]
