@@ -17,10 +17,14 @@ self assert: cell nbNeighbour equals: 0
 
 { #category : #tests }
 GameOfLifeNeighourTalentTest >> testNeighbourCount [
-	| gameOfLife |
+	| gameOfLife trigger |
 	gameOfLife := GameOfLife
 		newFromString:
 			'
 	|0|0|'.
 	gameOfLife cellsDo: [ :aCell | self assert: aCell nbNeighbour equals: 1 ].
+  trigger := false.
+  gameOfLife cellsDo: [ :aCell | aCell announcer when: GoLNeighbourChangeAnnouncement do: [ trigger := true] ].
+  gameOfLife cellsDo: [ :aCell | aCell getBorn ].
+  self assert: trigger.
 ]
