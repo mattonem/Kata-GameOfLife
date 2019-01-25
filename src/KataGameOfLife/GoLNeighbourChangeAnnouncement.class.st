@@ -1,7 +1,9 @@
 Class {
 	#name : #GoLNeighbourChangeAnnouncement,
 	#superclass : #Announcement,
-	#instVars : [ 'cell' ],
+	#instVars : [
+		'cell'
+	],
 	#category : 'KataGameOfLife'
 }
 

@@ -13,9 +13,9 @@ GameOfLifeTest >> testInitialize [
 	gameOfLife := GameOfLife
 		newFromString:
 			'
-	|1|1|1|
-	|1|1|1|
-	|1|1|1|
+	|0|1|0|
+	|0|1|0|
+	|0|1|0|
 	'.
 	self assert: gameOfLife nbRows equals: 3.
 	self assert: gameOfLife nbColumns equals: 3.
@@ -27,6 +27,26 @@ GameOfLifeTest >> testInitialize [
 |1|1|1|
 |1|1|1|
 |1|1|1|' trim.
+]
+
+{ #category : #tests }
+GameOfLifeTest >> testLoop [
+	| gameOfLife |
+	gameOfLife := GameOfLife
+		newFromString:
+			'
+	|0|1|0|
+	|0|1|0|
+	|0|1|0|
+	'.
+	gameOfLife step.
+	self
+		assert: gameOfLife asString trim
+		equals:
+			'
+|0|0|0|
+|1|1|1|
+|0|0|0|' trim.
 ]
 
 { #category : #tests }
