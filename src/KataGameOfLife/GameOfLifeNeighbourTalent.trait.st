@@ -1,19 +1,20 @@
 Trait {
 	#name : #GameOfLifeNeighbourTalent,
 	#instVars : [
-		'neighbours'
+		'neighbours',
+    'nbAliveCount'
 	],
 	#category : 'KataGameOfLife'
 }
 
 { #category : #'as yet unclassified' }
 GameOfLifeNeighbourTalent >> aliveNeighbours [
-	^ neighbours count: #isAlive
+	^ nbAliveCount
 ]
 
 { #category : #initialization }
 GameOfLifeNeighbourTalent >> initializeOnCellGameOfLifeNeighbourTalent: aCell inBoard: inBoard [
-	neighbours
+  neighbours
 		addAll:
 			({(inBoard rightOf: aCell).
 			(inBoard rightUpOf: aCell).
@@ -25,7 +26,16 @@ GameOfLifeNeighbourTalent >> initializeOnCellGameOfLifeNeighbourTalent: aCell in
 			(inBoard leftUpOf: aCell).
 			(inBoard leftDownOf: aCell)} asSet
 				remove: nil ifAbsent: [];
-				yourself)
+				yourself).
+  nbAliveCount := neighbours count: #isAlive.
+  neighbours do: [:aCell |
+    aCell announcer
+      when: GameOfLifeCellGotBorn
+      do: [ nbAliveCount := nbAliveCount + 1 ]].
+  neighbours do: [:aCell |
+    aCell announcer
+      when: GameOfLifeCellDies 
+      do: [ nbAliveCount := nbAliveCount - 1 ]].
 ]
 
 { #category : #initialization }
