@@ -4,6 +4,8 @@ Trait {
 		'neighbours',
 		'nbAliveCount'
 	],
+	#traits : 'GoLAnnouncerTrait',
+	#classTraits : 'GoLAnnouncerTrait classTrait',
 	#category : #KataGameOfLife
 }
 
