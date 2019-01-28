@@ -7,14 +7,15 @@ Class {
 { #category : #'as yet unclassified' }
 GameOfLifeLiveOrDieRule >> applyRule: aBoard [
 	aBoard
-		cellsDo: [ :aCell | 
+		cellsDo: [ :aCell |
 			aCell announcer
 				when:
 					GoLNeighbourChangeAnnouncement , GameOfLifeCellDies
 						, GameOfLifeCellGotBorn
-				do: [ aCell isAlive
+				do: [
+					aBoard announcer unsubscribe: aCell.
+					aCell isAlive
 						ifTrue: [ (aCell aliveNeighbours = 2 or: aCell aliveNeighbours = 3)
-								ifTrue: [ aBoard announcer unsubscribe: aCell ]
 								ifFalse: [ aBoard announcer
 										when: GameOfLifeStepAnnouncement
 										do: [ aCell die ]
@@ -23,8 +24,7 @@ GameOfLifeLiveOrDieRule >> applyRule: aBoard [
 								ifTrue: [ aBoard announcer
 										when: GameOfLifeStepAnnouncement
 										do: [ aCell getBorn ]
-										for: aCell ]
-								ifFalse: [ aBoard announcer unsubscribe: aCell ] ] ] ]
+										for: aCell ] ] ] ]
 ]
 
 { #category : #'as yet unclassified' }
