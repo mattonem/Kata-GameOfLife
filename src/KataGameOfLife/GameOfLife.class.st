@@ -28,18 +28,31 @@ GameOfLife >> addRowFromString: aString [
 { #category : #initialize }
 GameOfLife >> addRule: aGameOfLifeRule [
 	aGameOfLifeRule requiredTalents
-		do: [ :aTalent |
+		do: [ :aTalent | 
 			self
-				cellsDo: [ :aCell |
+				cellsDo: [ :aCell | 
 					[ aCell addTalent: aTalent.
 					aCell
 						perform: ('initializeOnCell' , aTalent name , ':inBoard:') asSymbol
 						with: aCell
 						with: self ]
 						on: Error
-						do: [ :e |
+						do: [ :e | 
 							e messageText = 'Could not include the same traits twice'
-								ifFalse: [ e signal ] ] ] ]
+								ifFalse: [ e signal ] ] ] ].
+	aGameOfLifeRule applyRule: self.
+	self
+		cellsDo: [ :aCell | 
+			aCell
+				announcer announce:
+					(GoLNeighbourChangeAnnouncement new
+						cell: aCell;
+						yourself) ]
+]
+
+{ #category : #acessing }
+GameOfLife >> announcer [
+	^ announcer
 ]
 
 { #category : #accessing }
@@ -67,7 +80,7 @@ GameOfLife >> initialize [
 
 { #category : #accessign }
 GameOfLife >> leftDownOf: aGameOfLifeCell [
-	^ self downOf: ((self rightOf: aGameOfLifeCell) ifNil: [ ^ nil ])
+	^ self downOf: ((self leftOf: aGameOfLifeCell) ifNil: [ ^ nil ])
 ]
 
 { #category : #'as yet unclassified' }

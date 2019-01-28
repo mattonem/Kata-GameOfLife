@@ -21,6 +21,7 @@ GameOfLifeCell >> announcer [
 
 { #category : #'as yet unclassified' }
 GameOfLifeCell >> die [
+	status := GameOfLifeStatusDead new.
 	announcer
 		announce:
 			(GameOfLifeCellDies new
@@ -36,7 +37,8 @@ GameOfLifeCell >> fromString: aString [
 
 { #category : #'as yet unclassified' }
 GameOfLifeCell >> getBorn [
-		announcer
+	status := GameOfLifeStatusAlive new.
+	announcer
 		announce:
 			(GameOfLifeCellGotBorn new
 				cell: self;

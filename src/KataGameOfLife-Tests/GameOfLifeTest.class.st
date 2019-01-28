@@ -30,6 +30,34 @@ GameOfLifeTest >> testInitialize [
 ]
 
 { #category : #tests }
+GameOfLifeTest >> testLoop [
+	| gameOfLife |
+	gameOfLife := GameOfLife
+		newFromString:
+			'
+	|0|1|0|
+	|0|1|0|
+	|0|1|0|
+	'.
+	gameOfLife step.
+	self
+		assert: gameOfLife asString trim
+		equals:
+			'
+|0|0|0|
+|1|1|1|
+|0|0|0|' trim.
+gameOfLife step.
+	self
+		assert: gameOfLife asString trim
+		equals:
+			'
+|0|1|0|
+|0|1|0|
+|0|1|0|' trim.
+]
+
+{ #category : #tests }
 GameOfLifeTest >> testNeighbourCount [
 	| gameOfLife |
 	gameOfLife := GameOfLife
