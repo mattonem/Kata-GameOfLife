@@ -14,7 +14,7 @@ BaselineOfKataGameOfLife >> baseline: spec [
 				baseline: 'Bloc';
    				with: [ spec
 					repository: 'github://pharo-graphics/Bloc/src';
-					loads: #default]
+					loads: #default].
 			spec
 				baseline: 'Talents'
 				with: [ spec
