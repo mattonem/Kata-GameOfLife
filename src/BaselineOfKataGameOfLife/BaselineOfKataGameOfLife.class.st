@@ -9,7 +9,13 @@ BaselineOfKataGameOfLife >> baseline: spec [
 	<baseline>
 	spec
 		for: #common
-		do: [ spec
+		do: [ 
+			spec
+				baseline: 'Bloc';
+   				with: [ spec
+					repository: 'github://pharo-graphics/Bloc/src';
+					loads: #default]
+			spec
 				baseline: 'Talents'
 				with: [ spec
 						repository: 'github://tesonep/pharo-talents/';
