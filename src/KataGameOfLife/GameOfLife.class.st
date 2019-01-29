@@ -9,6 +9,14 @@ Class {
 }
 
 { #category : #'instance creation' }
+GameOfLife class >> col: col row: row [
+	^ self new
+		col: col row: row;
+		addRule: GameOfLifeLiveOrDieRule new;
+		yourself
+]
+
+{ #category : #'instance creation' }
 GameOfLife class >> newFromString: aString [
   | inst |
   inst := self new onString: aString.
@@ -63,6 +71,13 @@ GameOfLife >> cellAt: aPoint [
 { #category : #'as yet unclassified' }
 GameOfLife >> cellsDo: aBlockClosure [
 	rows do: [ :aRow | aRow cellsDo: aBlockClosure ]
+]
+
+{ #category : #intialization }
+GameOfLife >> col: anInteger row: anInteger2 [ 
+	anInteger2 timesRepeat: [rows add: (GameOfLifeRow new col: anInteger)].
+	rows
+		doWithIndex: [ :aRow :rowIndex | aRow cellsDoWithIndex: [ :aCell :colIndex | aCell position: (rowIndex @ colIndex) ] ].
 ]
 
 { #category : #accessing }
