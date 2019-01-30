@@ -23,7 +23,7 @@ GameOfLifeCellBloc >> cell [
 { #category : #'as yet unclassified' }
 GameOfLifeCellBloc >> cell: aCell [
 	aCell announcer
-		when: GameOfLifeCellDies , GameOfLifeCellGotBorn
+		when: GameOfLifeStatusChanged 
 		do: [ self invalidate ].
 	^ cell := aCell
 ]

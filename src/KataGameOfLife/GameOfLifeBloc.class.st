@@ -1,10 +1,14 @@
 "
-gameOfLife := GameOfLife
-		col: 200 row: 200.
-view := GameOfLifeBloc new game: gameOfLife.
-[100 timesRepeat: [gameOfLife step. 10 milliSecond wait] .view invalidate] fork.
-
-
+space := BlSpace new.
+space extent: 420@420.
+game := GameOfLife launcher.
+grid := GameOfLifeBloc new.
+grid game: game.
+space root addChild: grid.
+space show.
+grid invalidate.
+[1000 timesRepeat: [game step. 100 milliSecond wait]. ] fork.
+game 
 "
 Class {
 	#name : #GameOfLifeBloc,
@@ -18,6 +22,7 @@ Class {
 { #category : #accessing }
 GameOfLifeBloc >> game: agame [
 	game := agame.
+	"game announcer when: GameOfLifeStepFinishAnnouncement do: [ self invalidate ]."
 	game
 		cellsDo: [ :aCell | 
 			self
