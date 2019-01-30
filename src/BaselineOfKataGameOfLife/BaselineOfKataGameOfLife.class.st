@@ -9,7 +9,7 @@ BaselineOfKataGameOfLife >> baseline: spec [
 	<baseline>
 	spec
 		for: #common
-		do: [ 
+		do: [
 			spec
 				baseline: 'Bloc'
    				with: [ spec
@@ -22,6 +22,7 @@ BaselineOfKataGameOfLife >> baseline: spec [
 						loads: #test ].
 			spec
 				package: 'KataGameOfLife';
-				package: 'KataGameOfLife-Tests' ]
+				package: 'KataGameOfLife-Tests';
+        package: 'KataGameOfLife-Bloc' ]
 
 ]
