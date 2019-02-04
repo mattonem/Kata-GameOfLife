@@ -27,6 +27,11 @@ GameOfLifeRow >> cellsDoWithIndex: aBlockClosure [
   cells doWithIndex: aBlockClosure
 ]
 
+{ #category : #intialization }
+GameOfLifeRow >> col: anInteger [ 
+	anInteger timesRepeat:[ cells add: (GameOfLifeCell newFromString: '0')]
+]
+
 { #category : #initialize }
 GameOfLifeRow >> initialize [
 	super initialize.

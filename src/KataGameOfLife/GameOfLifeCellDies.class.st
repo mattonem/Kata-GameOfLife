@@ -1,13 +1,5 @@
 Class {
 	#name : #GameOfLifeCellDies,
-	#superclass : #Announcement,
-	#instVars : [
-		'cell'
-	],
-	#category : 'KataGameOfLife'
+	#superclass : #GameOfLifeStatusChanged,
+	#category : #KataGameOfLife
 }
-
-{ #category : #accessing }
-GameOfLifeCellDies >> cell: aGameOfLifeCell [ 
-	cell := aGameOfLifeCell
-]
