@@ -21,8 +21,16 @@ BaselineOfKataGameOfLife >> baseline: spec [
 						repository: 'github://tesonep/pharo-talents/';
 						loads: #test ].
 			spec
-				package: 'KataGameOfLife';
-				package: 'KataGameOfLife-Tests';
-        package: 'KataGameOfLife-Bloc' ]
+				package: 'KataGameOfLife' with: [ spec requires: 'Talents' ];
+				package: 'KataGameOfLife-Tests' with: [ spec requires: 'KataGameOfLife' ];
+				package: 'KataGameOfLife-Bloc' with: [ spec requires: #('KataGameOfLife' 'Bloc') ].
+			spec group: 'core'
+				with: #('KataGameOfLife');
+			     group: 'tests'
+			     	with: #('KataGameOfLife-Tests');
+			     group: 'bloc'
+			     	with: #('KataGameOfLife-Bloc').
+]
 
 ]
+
