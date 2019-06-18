@@ -3,7 +3,8 @@ SmalltalkCISpec {
     SCIMetacelloLoadSpec {
       #baseline : 'KataGameOfLife',
       #directory : 'src', 
-      #platforms : [ #pharo ]
+      #platforms : [ #pharo ],
+      #load: [ 'tests' ]
     }
   ],
   #testing : {
