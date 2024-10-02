@@ -1,20 +1,21 @@
 Class {
-	#name : #GameOfLifeStatusAlive,
-	#superclass : #GameOfLifeStatus,
-	#category : 'KataGameOfLife'
+	#name : 'GameOfLifeStatusAlive',
+	#superclass : 'GameOfLifeStatus',
+	#category : 'KataGameOfLife',
+	#package : 'KataGameOfLife'
 }
 
-{ #category : #initialize }
+{ #category : 'initialize' }
 GameOfLifeStatusAlive class >> stringValue [
 	^ '1'
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GameOfLifeStatusAlive >> isAlive [
 	^ true
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 GameOfLifeStatusAlive >> printOn: aStream [
 	aStream << $1
 ]

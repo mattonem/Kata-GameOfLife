@@ -1,13 +1,14 @@
 Class {
-	#name : #GameOfLifeStepFinishAnnouncement,
-	#superclass : #Announcement,
+	#name : 'GameOfLifeStepFinishAnnouncement',
+	#superclass : 'GoLAnnouncement',
 	#instVars : [
 		'game'
 	],
-	#category : #KataGameOfLife
+	#category : 'KataGameOfLife',
+	#package : 'KataGameOfLife'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameOfLifeStepFinishAnnouncement >> game: aGameOfLife [ 
 	game := aGameOfLife
 ]

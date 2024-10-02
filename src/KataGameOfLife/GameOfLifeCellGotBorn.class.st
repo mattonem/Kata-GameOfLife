@@ -1,5 +1,6 @@
 Class {
-	#name : #GameOfLifeCellGotBorn,
-	#superclass : #GameOfLifeStatusChanged,
-	#category : #KataGameOfLife
+	#name : 'GameOfLifeCellGotBorn',
+	#superclass : 'GameOfLifeStatusChanged',
+	#category : 'KataGameOfLife',
+	#package : 'KataGameOfLife'
 }

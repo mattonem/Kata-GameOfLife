@@ -1,27 +1,28 @@
 Trait {
-	#name : #GoLPositionnableTrait,
+	#name : 'GoLPositionnableTrait',
 	#instVars : [
 		'position'
 	],
-	#category : #KataGameOfLife
+	#category : 'KataGameOfLife',
+	#package : 'KataGameOfLife'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GoLPositionnableTrait >> position [
 	 ^ position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GoLPositionnableTrait >> position: aPoint [
 	 ^ position := aPoint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GoLPositionnableTrait >> x [
 	 ^ position x
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GoLPositionnableTrait >> y [
 	 ^ position y
 ]

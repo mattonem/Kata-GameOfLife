@@ -1,13 +1,13 @@
 Trait {
-	#name : #GoLAnnouncerTrait,
+	#name : 'GoLAnnouncerTrait',
 	#instVars : [
 		'announcer'
 	],
-	#category : #KataGameOfLife
+	#category : 'KataGameOfLife',
+	#package : 'KataGameOfLife'
 }
 
-{ #category : #initialization }
-GoLAnnouncerTrait >> initialize [
-	super initialize.
-	announcer := Announcer new.
+{ #category : 'initialization' }
+GoLAnnouncerTrait >> initializeGoLAnnouncerTrait [
+	announcer := GoLAnnouncer new.
 ]

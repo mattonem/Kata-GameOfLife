@@ -1,14 +1,15 @@
 Class {
-	#name : #GameOfLife,
-	#superclass : #Object,
+	#name : 'GameOfLife',
+	#superclass : 'Object',
 	#instVars : [
 		'rows',
 		'announcer'
 	],
-	#category : 'KataGameOfLife'
+	#category : 'KataGameOfLife',
+	#package : 'KataGameOfLife'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 GameOfLife class >> col: col row: row [
 	^ self new
 		col: col row: row;
@@ -16,9 +17,10 @@ GameOfLife class >> col: col row: row [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 GameOfLife class >> launcher [
-^ self newFromString: 
+<script>
+^( self newFromString: 
 '|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
 |0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
 |0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
@@ -54,10 +56,10 @@ GameOfLife class >> launcher [
 |0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
 |0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
 |0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
-|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|'
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|') inspect
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 GameOfLife class >> newFromString: aString [
   | inst |
   inst := self new onString: aString.
@@ -65,7 +67,7 @@ GameOfLife class >> newFromString: aString [
   ^ inst
 ]
 
-{ #category : #initialize }
+{ #category : 'initialize' }
 GameOfLife >> addRowFromString: aString [
 	| aRow |
 	aRow := rows add: GameOfLifeRow new.
@@ -74,97 +76,81 @@ GameOfLife >> addRowFromString: aString [
 
 ]
 
-{ #category : #initialize }
+{ #category : 'initialize' }
 GameOfLife >> addRule: aGameOfLifeRule [
-	aGameOfLifeRule requiredTalents
-		do: [ :aTalent | 
-			self
-				cellsDo: [ :aCell | 
-					[ aCell addTalent: aTalent.
-					aCell
-						perform: ('initializeOnCell' , aTalent name , ':inBoard:') asSymbol
-						with: aCell
-						with: self ]
-						on: Error
-						do: [ :e | 
-							e messageText = 'Could not include the same traits twice'
-								ifFalse: [ e signal ] ] ] ].
 	aGameOfLifeRule applyRule: self.
-	self
-		cellsDo: [ :aCell | 
-			aCell
-				announcer announce:
-					(GoLNeighbourChangeAnnouncement new
-						cell: aCell;
-						yourself) ]
+	self cellsDo: [ :aCell |
+		aCell announcer announce: (GoLNeighbourChangeAnnouncement new
+				 cell: aCell;
+				 yourself) ]
 ]
 
-{ #category : #acessing }
+{ #category : 'acessing' }
 GameOfLife >> announcer [
 	^ announcer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameOfLife >> cellAt: aPoint [
 	^ (rows at: aPoint x ifAbsent: [^ nil]) cellAt: aPoint y
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 GameOfLife >> cellsDo: aBlockClosure [
 	rows do: [ :aRow | aRow cellsDo: aBlockClosure ]
 ]
 
-{ #category : #intialization }
+{ #category : 'intialization' }
 GameOfLife >> col: anInteger row: anInteger2 [ 
 	anInteger2 timesRepeat: [rows add: (GameOfLifeRow new col: anInteger)].
 	rows
 		doWithIndex: [ :aRow :rowIndex | aRow cellsDoWithIndex: [ :aCell :colIndex | aCell position: (rowIndex @ colIndex) ] ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameOfLife >> downOf: aGameOfLifeCell [
 	^ self cellAt: (self positionOf: aGameOfLifeCell) + (1@0)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GameOfLife >> initialize [
 	super initialize.
 	rows := OrderedCollection new.
-	announcer := Announcer new
+	announcer := GoLAnnouncer new
 
 ]
 
-{ #category : #accessign }
+{ #category : 'accessign' }
 GameOfLife >> leftDownOf: aGameOfLifeCell [
 	^ self downOf: ((self leftOf: aGameOfLifeCell) ifNil: [ ^ nil ])
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 GameOfLife >> leftOf: aGameOfLifeCell [
 	^ self cellAt: (self positionOf: aGameOfLifeCell) + (0@(-1))
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 GameOfLife >> leftUpOf: aGameOfLifeCell [
 	^ self upOf: ((self leftOf: aGameOfLifeCell) ifNil: [ ^ nil ])
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameOfLife >> nbCells [
 	^ self nbRows * self nbColumns
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameOfLife >> nbColumns [
 	^ rows ifNotEmpty: [ rows first nbCells ] ifEmpty: 0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameOfLife >> nbRows [
 	^ rows size
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GameOfLife >> onString: aString [
 	(aString
 		findTokens:
@@ -175,12 +161,12 @@ GameOfLife >> onString: aString [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameOfLife >> positionOf: aGameOfLifeCell [
 	^ aGameOfLifeCell position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameOfLife >> printOn: aStream [
 	rows do: [ :aRow |
 		aRow printOn: aStream.
@@ -188,28 +174,28 @@ GameOfLife >> printOn: aStream [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameOfLife >> rightDownOf: aGameOfLifeCell [
 	^ self downOf: ((self rightOf: aGameOfLifeCell) ifNil: [ ^ nil ])
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameOfLife >> rightOf: aGameOfLifeCell [
 	^ self cellAt: (self positionOf: aGameOfLifeCell) + (0@1)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameOfLife >> rightUpOf: aGameOfLifeCell [
 	^ self upOf: ((self rightOf: aGameOfLifeCell) ifNil: [ ^ nil ])
 ]
 
-{ #category : #processing }
+{ #category : 'processing' }
 GameOfLife >> step [
 	announcer announce: (GameOfLifeStepAnnouncement new game: self; yourself).
 	announcer announce: (GameOfLifeStepFinishAnnouncement new game: self; yourself).
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameOfLife >> upOf: aGameOfLifeCell [
 	^ self cellAt: (self positionOf: aGameOfLifeCell) + (-1@0)
 ]

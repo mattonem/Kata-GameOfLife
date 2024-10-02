@@ -1,13 +1,14 @@
 Class {
-	#name : #GameOfLifeStatusChanged,
-	#superclass : #Announcement,
+	#name : 'GameOfLifeStatusChanged',
+	#superclass : 'GoLAnnouncement',
 	#instVars : [
 		'cell'
 	],
-	#category : #KataGameOfLife
+	#category : 'KataGameOfLife',
+	#package : 'KataGameOfLife'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameOfLifeStatusChanged >> cell: aGameOfLifeCell [ 
 	cell := aGameOfLifeCell
 ]

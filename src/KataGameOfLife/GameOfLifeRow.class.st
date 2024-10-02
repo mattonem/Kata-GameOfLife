@@ -1,49 +1,50 @@
 Class {
-	#name : #GameOfLifeRow,
-	#superclass : #Object,
+	#name : 'GameOfLifeRow',
+	#superclass : 'Object',
 	#instVars : [
 		'cells'
 	],
-	#category : 'KataGameOfLife'
+	#category : 'KataGameOfLife',
+	#package : 'KataGameOfLife'
 }
 
-{ #category : #initialize }
+{ #category : 'initialize' }
 GameOfLifeRow >> addCellFromString: aString [
 	^ cells add: (GameOfLifeCell newFromString: aString)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameOfLifeRow >> cellAt: anInteger [
 	^ cells at: anInteger ifAbsent: [ ^ nil ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 GameOfLifeRow >> cellsDo: aBlockClosure [
 	cells do: aBlockClosure
 ]
 
-{ #category : #'' }
+{ #category : 'as yet unclassified' }
 GameOfLifeRow >> cellsDoWithIndex: aBlockClosure [
   cells doWithIndex: aBlockClosure
 ]
 
-{ #category : #intialization }
+{ #category : 'intialization' }
 GameOfLifeRow >> col: anInteger [ 
 	anInteger timesRepeat:[ cells add: (GameOfLifeCell newFromString: '0')]
 ]
 
-{ #category : #initialize }
+{ #category : 'initialize' }
 GameOfLifeRow >> initialize [
 	super initialize.
 	cells := OrderedCollection new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameOfLifeRow >> nbCells [
 	^ cells size
 ]
 
-{ #category : #initialize }
+{ #category : 'initialize' }
 GameOfLifeRow >> printOn: aStream [
 	aStream << $|.
 	cells do: [:cell | cell printOn: aStream.

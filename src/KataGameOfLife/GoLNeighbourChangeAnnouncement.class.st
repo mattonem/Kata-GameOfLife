@@ -1,13 +1,14 @@
 Class {
-	#name : #GoLNeighbourChangeAnnouncement,
-	#superclass : #Announcement,
+	#name : 'GoLNeighbourChangeAnnouncement',
+	#superclass : 'GoLAnnouncement',
 	#instVars : [
 		'cell'
 	],
-	#category : 'KataGameOfLife'
+	#category : 'KataGameOfLife',
+	#package : 'KataGameOfLife'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GoLNeighbourChangeAnnouncement >> cell: aCell [
 	cell := aCell
 ]
