@@ -4,8 +4,3 @@ Class {
 	#category : 'KataGameOfLife',
 	#package : 'KataGameOfLife'
 }
-
-{ #category : 'as yet unclassified' }
-GameOfLifeRule >> requiredTalents [
-	^ {  }
-]

@@ -1,0 +1,178 @@
+Class {
+	#name : 'GoLApp',
+	#superclass : 'PjFileBasedWebApp',
+	#traits : 'StaticComponentHolder',
+	#classTraits : 'StaticComponentHolder classTrait',
+	#instVars : [
+		'clock',
+		'reference',
+		'model'
+	],
+	#classInstVars : [
+		'staticComponents'
+	],
+	#category : 'KataGameOfLife-PharoJs',
+	#package : 'KataGameOfLife-PharoJs'
+}
+
+{ #category : 'description' }
+GoLApp class >> appClasses [
+
+	<pharoJsSkip>
+	^ super appClasses , { WCGameBoxCanvas }
+]
+
+{ #category : 'description' }
+GoLApp class >> bridgeClientClass [
+	<pharoJsSkip>
+	
+	^ PjZnHostedBrowserBridgeClient
+]
+
+{ #category : 'description' }
+GoLApp class >> exporterClass [
+	<pharoJsSkip>
+	
+	^ PjFileExporterWithIndexHtml
+]
+
+{ #category : 'description' }
+GoLApp class >> generateHtmlUsing: html [
+
+	<pharoJsSkip>
+	html div
+		class: 'container';
+		with: [
+			html div
+				class: 'card col-10 mx-auto text-center';
+				with: [
+					html div
+						class: 'card-header';
+						with: [
+							html heading
+								level: 1;
+								with: 'GameBox' ].
+					html div
+						class: 'card-body';
+						with: [
+							html div with: [
+									self addComponent: (WCGameBoxCanvas on: html) named: #plotter ].
+							html div with: [
+									html label
+										for: 'tps';
+										class: 'form-label';
+										with: 'TPS: '.
+									html inputRange
+										min: 1;
+										max: 240;
+										value: 120;
+										class: 'form-range';
+										id: 'tps' ].
+							html div with: [
+								html label
+									for: 'timeFactor';
+									class: 'form-label';
+									with: 'TimeSpeed: '.
+								html inputRange
+									min: 1;
+									max: 1000;
+									value: 100;
+									class: 'form-range';
+									id: 'timeFactor' ].
+							html div
+								id: #start;
+								class: 'btn btn-primary';
+								with: 'Start Clock'.
+							html div
+								id: #stop;
+								class: 'btn btn-primary';
+								with: 'Stop Clock' ] ] ]
+]
+
+{ #category : 'description' }
+GoLApp class >> updateHtmlRoot: root [
+
+	<pharoJsSkip>
+	root language: 'en'.
+	root stylesheet url:
+		'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css'
+]
+
+{ #category : 'as yet unclassified' }
+GoLApp >> randomColor [
+
+	| value r g b |
+	value := (0 to: 255) atRandom.
+	r := (value asInteger toString: 16) padStart: 2 with: '0'.
+	value := (0 to: 255) atRandom.
+	g := (value asInteger toString: 16) padStart: 2 with: '0'.
+	value := (0 to: 255) atRandom.
+	b := (value asInteger toString: 16) padStart: 2 with: '0'.
+	^ '#' , r , g , b
+]
+
+{ #category : 'as yet unclassified' }
+GoLApp >> sceneFactory [
+
+	| node orchestrator drawEvent |
+	drawEvent := GBDrawSequenceStart new
+		             context: (self componentNamed: #plotter) context;
+		             yourself.
+
+	orchestrator := GBOchestrator new
+		                sequence: {
+				                GBCalculate new.
+				                GBUpdate new.
+				                drawEvent };
+		                yourself.
+	clock := GBClock new.
+	clock requestedTps: 120.
+	node := GBNode new.
+	node addElement: (reference := GBDrawingReference new
+			              position: 500 @ 500;
+			              yourself).
+	node addElement: clock.
+	node addElement: orchestrator.
+	node addElement: GBDrawSequencer new.
+	node addElement: (GBCaptureMouseClick new
+			 onCanvas: (self componentNamed: #plotter);
+			 yourself).
+	node addElement: (GBCaptureMouseMove new
+			 onCanvas: (self componentNamed: #plotter);
+			 yourself).
+	self startLogoScene.
+	^ node
+]
+
+{ #category : 'initialize-release' }
+GoLApp >> start [
+
+	super start.
+	self initializeComponentHolder.
+	console log: AnnouncementSet new, GoLNeighbourChangeAnnouncement .
+	model := GameOfLife col: 10 row: 10.
+
+	(self componentNamed: #plotter) scene: self sceneFactory.
+	(document getElementById: #start)
+		addEventListener: #click
+		block: [ clock start ].
+	(document getElementById: #stop)
+		addEventListener: #click
+		block: [ clock stop ].
+	(document getElementById: #tps)
+		addEventListener: #input
+		block: [ clock requestedTps: (document getElementById: #tps) value ].
+	(document getElementById: #timeFactor)
+		addEventListener: #input
+		block: [
+			clock timeFactor:
+				(document getElementById: #timeFactor) value asInteger / 100 ].
+	clock start
+]
+
+{ #category : 'as yet unclassified' }
+GoLApp >> startLogoScene [
+
+	reference deleteAllChildren.
+	
+]
