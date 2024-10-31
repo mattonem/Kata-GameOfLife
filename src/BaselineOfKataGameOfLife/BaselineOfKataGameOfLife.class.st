@@ -11,8 +11,8 @@ BaselineOfKataGameOfLife >> baseline: spec [
 	<baseline>
 	spec for: #common do: [
 		spec
-			baseline: 'Camping'
-			with: [ spec repository: 'github://mattonem/WildCamping' ].
+			baseline: 'Gamebox'
+			with: [ spec repository: 'github://mattonem/WCGamebox' ].
 		spec
 			package: 'KataGameOfLife' with: [  ];
 			package: 'KataGameOfLife-Tests'
