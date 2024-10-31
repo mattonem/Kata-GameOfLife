@@ -2,27 +2,36 @@
 A GameOfLifeCellTest is a test class for testing the behavior of GameOfLifeCell
 "
 Class {
-	#name : #GameOfLifeCellTest,
-	#superclass : #TestCase,
-	#category : 'KataGameOfLife-Tests'
+	#name : 'GameOfLifeCellTest',
+	#superclass : 'TestCase',
+	#category : 'KataGameOfLife-Tests',
+	#package : 'KataGameOfLife-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 GameOfLifeCellTest >> testCellAnnouncementBorn [
+
 	| cell triggerred |
 	cell := GameOfLifeCell newFromString: '1'.
 	triggerred := false.
-	cell announcer when: GameOfLifeCellGotBorn do: [ triggerred := true ]. 
+	cell announcer
+		when: GameOfLifeCellGotBorn
+		do: [ triggerred := true ]
+		for: self.
 	cell getBorn.
-	self assert: triggerred	
+	self assert: triggerred
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 GameOfLifeCellTest >> testCellAnnouncementDies [
+
 	| cell triggerred |
 	cell := GameOfLifeCell newFromString: '1'.
 	triggerred := false.
-	cell announcer when: GameOfLifeCellDies do: [ triggerred := true ]. 
+	cell announcer
+		when: GameOfLifeCellDies
+		do: [ triggerred := true ]
+		for: self.
 	cell die.
-	self assert: triggerred	
+	self assert: triggerred
 ]

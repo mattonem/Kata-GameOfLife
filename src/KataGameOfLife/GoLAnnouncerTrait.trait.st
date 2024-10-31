@@ -9,5 +9,5 @@ Trait {
 
 { #category : 'initialization' }
 GoLAnnouncerTrait >> initializeGoLAnnouncerTrait [
-	announcer := GoLAnnouncer new.
+	announcer := Announcer new.
 ]

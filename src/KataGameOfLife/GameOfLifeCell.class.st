@@ -1,8 +1,8 @@
 Class {
 	#name : 'GameOfLifeCell',
 	#superclass : 'Object',
-	#traits : 'GoLAnnouncerTrait + GoLPositionnableTrait + GameOfLifeNeighbourTalent',
-	#classTraits : 'GoLAnnouncerTrait classTrait + GoLPositionnableTrait classTrait + GameOfLifeNeighbourTalent classTrait',
+	#traits : 'GoLAnnouncerTrait + GoLPositionnableTrait + GameOfLifeNeighbourTrait',
+	#classTraits : 'GoLAnnouncerTrait classTrait + GoLPositionnableTrait classTrait + GameOfLifeNeighbourTrait classTrait',
 	#instVars : [
 		'status'
 	],

@@ -22,9 +22,9 @@ GameOfLife class >> launcher [
 <script>
 ^( self newFromString: 
 '|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
-|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
-|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
-|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|1|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
+|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
+|0|0|1|1|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
+|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|1|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
 |0|0|0|0|0|0|0|0|0|0|0|0|1|1|0|0|0|0|0|0|1|1|0|0|0|0|0|0|0|0|0|0|0|0|1|1|0|0|0|0|
 |0|0|0|0|0|0|0|0|0|0|0|1|0|0|0|1|0|0|0|0|1|1|0|0|0|0|0|0|0|0|0|0|0|0|1|1|0|0|0|0|
 |1|1|0|0|0|0|0|0|0|0|1|0|0|0|0|0|1|0|0|0|1|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
@@ -78,6 +78,7 @@ GameOfLife >> addRowFromString: aString [
 
 { #category : 'initialize' }
 GameOfLife >> addRule: aGameOfLifeRule [
+
 	aGameOfLifeRule applyRule: self.
 	self cellsDo: [ :aCell |
 		aCell announcer announce: (GoLNeighbourChangeAnnouncement new
@@ -116,7 +117,7 @@ GameOfLife >> downOf: aGameOfLifeCell [
 GameOfLife >> initialize [
 	super initialize.
 	rows := OrderedCollection new.
-	announcer := GoLAnnouncer new
+	announcer := Announcer new
 
 ]
 
@@ -152,12 +153,20 @@ GameOfLife >> nbRows [
 
 { #category : 'initialization' }
 GameOfLife >> onString: aString [
-	(aString
-		findTokens:
-			{Character cr.
-			Character lf}) do: [ :aLine | aLine trim ifNotEmpty: [ self addRowFromString: aLine ] ].
-	rows
-		doWithIndex: [ :aRow :rowIndex | aRow cellsDoWithIndex: [ :aCell :colIndex | aCell position: (rowIndex @ colIndex) ] ].
+
+	(aString findTokens: {
+			 Character cr.
+			 Character lf }) do: [ :aLine |
+		aLine trim ifNotEmpty: [ self addRowFromString: aLine ] ].
+	rows doWithIndex: [ :aRow :rowIndex |
+		aRow cellsDoWithIndex: [ :aCell :colIndex |
+			aCell position: rowIndex @ colIndex ] ].
+	rows doWithIndex: [ :aRow :rowIndex |
+		aRow cellsDoWithIndex: [ :aCell :colIndex |
+			aCell
+				initializeOnCellGameOfLifeNeighbourTalent: aCell
+				inBoard: self ] ].
+
 	^ self
 ]
 

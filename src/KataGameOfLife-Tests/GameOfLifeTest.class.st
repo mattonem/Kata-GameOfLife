@@ -2,12 +2,13 @@
 A GameOfLifeTest is a test class for testing the behavior of GameOfLife
 "
 Class {
-	#name : #GameOfLifeTest,
-	#superclass : #TestCase,
-	#category : 'KataGameOfLife-Tests'
+	#name : 'GameOfLifeTest',
+	#superclass : 'TestCase',
+	#category : 'KataGameOfLife-Tests',
+	#package : 'KataGameOfLife-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 GameOfLifeTest >> testInitialize [
 	| gameOfLife |
 	gameOfLife := GameOfLife
@@ -29,7 +30,7 @@ GameOfLifeTest >> testInitialize [
 |1|1|1|' trim.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 GameOfLifeTest >> testLoop [
 	| gameOfLife |
 	gameOfLife := GameOfLife
@@ -57,7 +58,7 @@ gameOfLife step.
 |0|1|0|' trim.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 GameOfLifeTest >> testNeighbourCount [
 	| gameOfLife |
 	gameOfLife := GameOfLife
@@ -76,7 +77,7 @@ GameOfLifeTest >> testNeighbourCount [
 		cellsDo: [ :aCell | self assert: aCell aliveNeighbours equals: 0 ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 GameOfLifeTest >> testStepEasy [
 	| gameOfLife |
 	gameOfLife := GameOfLife newFromString: '|0|'.

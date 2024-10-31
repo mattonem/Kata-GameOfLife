@@ -1,6 +1,6 @@
 Class {
 	#name : 'GoLNeighbourChangeAnnouncement',
-	#superclass : 'GoLAnnouncement',
+	#superclass : 'Announcement',
 	#instVars : [
 		'cell'
 	],

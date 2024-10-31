@@ -1,1 +1,1 @@
-Package { #name : #'KataGameOfLife-Tests' }
+Package { #name : 'KataGameOfLife-Tests' }

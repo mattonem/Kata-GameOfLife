@@ -1,6 +1,6 @@
 Class {
 	#name : 'GameOfLifeStepFinishAnnouncement',
-	#superclass : 'GoLAnnouncement',
+	#superclass : 'Announcement',
 	#instVars : [
 		'game'
 	],
