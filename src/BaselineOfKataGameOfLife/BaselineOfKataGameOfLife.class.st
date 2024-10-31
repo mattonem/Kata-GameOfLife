@@ -18,7 +18,7 @@ BaselineOfKataGameOfLife >> baseline: spec [
 			package: 'KataGameOfLife-Tests'
 			with: [ spec requires: 'KataGameOfLife' ];
 			package: 'KataGameOfLife-PharoJs'
-			with: [ spec requires: #( 'KataGameOfLife' 'Camping' ) ].
+			with: [ spec requires: #( 'KataGameOfLife' 'Gamebox' ) ].
 		spec
 			group: 'core' with: #( 'KataGameOfLife' );
 			group: 'tests' with: #( 'KataGameOfLife-Tests' );
