@@ -86,7 +86,11 @@ GoLApp class >> generateHtmlUsing: html [
 							html div
 								id: #stop;
 								class: 'btn btn-primary';
-								with: 'Stop Clock' ] ] ]
+								with: 'Stop Clock'.
+							html div
+								id: #step;
+								class: 'btn btn-primary';
+								with: 'Step' ] ] ]
 ]
 
 { #category : 'description' }
@@ -96,6 +100,17 @@ GoLApp class >> updateHtmlRoot: root [
 	root language: 'en'.
 	root stylesheet url:
 		'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css'
+]
+
+{ #category : 'as yet unclassified' }
+GoLApp >> prepBoard [
+
+	reference deleteAllChildren.
+	model cellsDoWithPositon: [ :aCell :position |
+		(reference translation: 20 @ 20 * position) addElement:
+			(GBGoLCell new
+				 model: aCell;
+				 yourself) ]
 ]
 
 { #category : 'as yet unclassified' }
@@ -126,10 +141,10 @@ GoLApp >> sceneFactory [
 				                drawEvent };
 		                yourself.
 	clock := GBClock new.
-	clock requestedTps: 120.
+	clock requestedTps: 60.
 	node := GBNode new.
 	node addElement: (reference := GBDrawingReference new
-			              position: 500 @ 500;
+			              position: 0 @ 0;
 			              yourself).
 	node addElement: clock.
 	node addElement: orchestrator.
@@ -140,7 +155,8 @@ GoLApp >> sceneFactory [
 	node addElement: (GBCaptureMouseMove new
 			 onCanvas: (self componentNamed: #plotter);
 			 yourself).
-	self startLogoScene.
+	self prepBoard.
+	node addElement: GBDebugger new.
 	^ node
 ]
 
@@ -149,9 +165,8 @@ GoLApp >> start [
 
 	super start.
 	self initializeComponentHolder.
-	console log: AnnouncementSet new, GoLNeighbourChangeAnnouncement .
 	model := GameOfLife col: 10 row: 10.
-
+	console log: model.
 	(self componentNamed: #plotter) scene: self sceneFactory.
 	(document getElementById: #start)
 		addEventListener: #click
@@ -167,12 +182,7 @@ GoLApp >> start [
 		block: [
 			clock timeFactor:
 				(document getElementById: #timeFactor) value asInteger / 100 ].
-	clock start
-]
-
-{ #category : 'as yet unclassified' }
-GoLApp >> startLogoScene [
-
-	reference deleteAllChildren.
-	
+	(document getElementById: #step)
+		addEventListener: #click
+		block: [ model step ]
 ]

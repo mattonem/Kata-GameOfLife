@@ -39,11 +39,11 @@ GameOfLifeCell >> fromString: aString [
 { #category : 'as yet unclassified' }
 GameOfLifeCell >> getBorn [
 	status := GameOfLifeStatusAlive new.
-	announcer
+	"announcer
 		announce:
 			(GameOfLifeCellGotBorn new
 				cell: self;
-				yourself)
+				yourself)"
 ]
 
 { #category : 'acessing' }

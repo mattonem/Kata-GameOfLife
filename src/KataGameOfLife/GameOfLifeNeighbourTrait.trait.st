@@ -33,9 +33,7 @@ GameOfLifeNeighbourTrait >> initializeOnCellGameOfLifeNeighbourTalent: aCell inB
 			 (inBoard rightUpOf: aCell).
 			 (inBoard rightDownOf: aCell).
 			 (inBoard leftUpOf: aCell).
-			 (inBoard leftDownOf: aCell) } asSet
-			 remove: nil ifAbsent: [  ];
-			 yourself).
+			 (inBoard leftDownOf: aCell) } copyWithout: nil).
 	nbAliveCount := neighbours count: #isAlive.
 	neighbours do: [ :anotherCell |
 		anotherCell announcer
