@@ -1,36 +1,26 @@
 Class {
-	#name : #BaselineOfKataGameOfLife,
-	#superclass : #BaselineOf,
-	#category : 'BaselineOfKataGameOfLife'
+	#name : 'BaselineOfKataGameOfLife',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfKataGameOfLife',
+	#package : 'BaselineOfKataGameOfLife'
 }
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfKataGameOfLife >> baseline: spec [
+
 	<baseline>
-	spec
-		for: #common
-		do: [
-			spec
-				baseline: 'Bloc'
-   				with: [ spec
-					repository: 'github://pharo-graphics/Bloc/src';
-					loads: #default].
-			spec
-				baseline: 'Talents'
-				with: [ spec
-						repository: 'github://tesonep/pharo-talents/';
-						loads: #test ].
-			spec
-				package: 'KataGameOfLife' with: [ spec requires: 'Talents' ];
-				package: 'KataGameOfLife-Tests' with: [ spec requires: 'KataGameOfLife' ];
-				package: 'KataGameOfLife-Bloc' with: [ spec requires: #('KataGameOfLife' 'Bloc') ].
-			spec group: 'core'
-				with: #('KataGameOfLife');
-			     group: 'tests'
-			     	with: #('KataGameOfLife-Tests');
-			     group: 'bloc'
-			     	with: #('KataGameOfLife-Bloc').
+	spec for: #common do: [
+		spec
+			baseline: 'Camping'
+			with: [ spec repository: 'github://mattonem/WildCamping' ].
+		spec
+			package: 'KataGameOfLife' with: [  ];
+			package: 'KataGameOfLife-Tests'
+			with: [ spec requires: 'KataGameOfLife' ];
+			package: 'KataGameOfLife-PharoJs'
+			with: [ spec requires: #( 'KataGameOfLife' 'Camping' ) ].
+		spec
+			group: 'core' with: #( 'KataGameOfLife' );
+			group: 'tests' with: #( 'KataGameOfLife-Tests' );
+			group: 'pharoJs' with: #( 'KataGameOfLife-PharoJs' ) ]
 ]
-
-]
-
