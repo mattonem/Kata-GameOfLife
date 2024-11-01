@@ -18,7 +18,7 @@ GBGoLCell >> cellFactory [
 		        color: '#9F9F9F';
 		        corner: 20 @ 20;
 		        yourself.
-	ref := GBDrawingReference new.
+	ref := GBDrawingTranslation new.
 	ref
 		addElement: poly;
 		addElement: (GBMouseOverRectangle new corner: poly corner);

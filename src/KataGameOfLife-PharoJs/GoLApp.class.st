@@ -142,7 +142,7 @@ GoLApp >> sceneFactory [
 	clock := GBClock new.
 	clock requestedTps: 60.
 	node := GBNode new.
-	node addElement: (reference := GBDrawingReference new
+	node addElement: (reference := GBDrawingTranslation new
 			              position: 0 @ 0;
 			              yourself).
 	node addElement: clock.
