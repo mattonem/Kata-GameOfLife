@@ -4,7 +4,7 @@ SmalltalkCISpec {
       #baseline : 'KataGameOfLife',
       #directory : 'src', 
       #platforms : [ #pharo ],
-      #load: [ 'tests' ]
+      #load: [ 'tests', 'pharoJs' ]
     }
   ],
   #postLoading : [
