@@ -168,7 +168,7 @@ GoLApp >> start [
 	|scene|
 	super start.
 	self initializeComponentHolder.
-	model := GameOfLife col: 30 row: 30.
+	model := GameOfLife col: 40 row: 40.
 	(self componentNamed: #plotter) scene: (scene := self sceneFactory).
 	(document getElementById: #start)
 		addEventListener: #click
