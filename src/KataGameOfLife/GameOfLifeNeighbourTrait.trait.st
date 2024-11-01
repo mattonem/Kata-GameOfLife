@@ -2,7 +2,8 @@ Trait {
 	#name : 'GameOfLifeNeighbourTrait',
 	#instVars : [
 		'neighbours',
-		'nbAliveCount'
+		'nbAliveCount',
+		'neighbourChangedAnnouncement'
 	],
 	#traits : 'GoLAnnouncerTrait',
 	#classTraits : 'GoLAnnouncerTrait classTrait',
@@ -19,6 +20,9 @@ GameOfLifeNeighbourTrait >> aliveNeighbours [
 GameOfLifeNeighbourTrait >> initializeGoLNeighbourTrait [
 	self initializeGoLAnnouncerTrait.
 	neighbours := OrderedCollection new.
+	neighbourChangedAnnouncement := GoLNeighbourChangeAnnouncement new
+		  cell: self;
+		  yourself
 ]
 
 { #category : 'initialization' }
@@ -33,29 +37,31 @@ GameOfLifeNeighbourTrait >> initializeOnCellGameOfLifeNeighbourTalent: aCell inB
 			 (inBoard rightUpOf: aCell).
 			 (inBoard rightDownOf: aCell).
 			 (inBoard leftUpOf: aCell).
-			 (inBoard leftDownOf: aCell) } copyWithout: nil).
+			 (inBoard leftDownOf: aCell) } copyWithout: nil) asSet.
 	nbAliveCount := neighbours count: #isAlive.
 	neighbours do: [ :anotherCell |
 		anotherCell announcer
 			when: GameOfLifeCellGotBorn
 			do: [
 				nbAliveCount := nbAliveCount + 1.
-				announcer announce: (GoLNeighbourChangeAnnouncement new
-						 cell: self;
-						 yourself) ]
+				announcer announce: self neighbourChangedAnnouncement ]
 			for: self ].
 	neighbours do: [ :anotherCell |
 		anotherCell announcer
 			when: GameOfLifeCellDies
 			do: [
 				nbAliveCount := nbAliveCount - 1.
-				announcer announce: (GoLNeighbourChangeAnnouncement new
-						 cell: self;
-						 yourself) ]
+				announcer announce: self neighbourChangedAnnouncement ]
 			for: self ]
 ]
 
 { #category : 'acessing' }
 GameOfLifeNeighbourTrait >> nbNeighbour [
 	^ neighbours size
+]
+
+{ #category : 'initialization' }
+GameOfLifeNeighbourTrait >> neighbourChangedAnnouncement [
+
+	^ neighbourChangedAnnouncement
 ]

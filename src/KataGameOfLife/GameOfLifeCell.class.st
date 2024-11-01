@@ -4,7 +4,9 @@ Class {
 	#traits : 'GoLAnnouncerTrait + GoLPositionnableTrait + GameOfLifeNeighbourTrait',
 	#classTraits : 'GoLAnnouncerTrait classTrait + GoLPositionnableTrait classTrait + GameOfLifeNeighbourTrait classTrait',
 	#instVars : [
-		'status'
+		'status',
+		'iDieAnnouncement',
+		'iGetBornAnnouncement'
 	],
 	#category : 'KataGameOfLife',
 	#package : 'KataGameOfLife'
@@ -22,12 +24,9 @@ GameOfLifeCell >> announcer [
 
 { #category : 'as yet unclassified' }
 GameOfLifeCell >> die [
+
 	status := GameOfLifeStatusDead new.
-	announcer
-		announce:
-			(GameOfLifeCellDies new
-				cell: self;
-				yourself)
+	announcer announce: self iDieAnnouncement
 ]
 
 { #category : 'initialize' }
@@ -38,18 +37,34 @@ GameOfLifeCell >> fromString: aString [
 
 { #category : 'as yet unclassified' }
 GameOfLifeCell >> getBorn [
+
 	status := GameOfLifeStatusAlive new.
-	"announcer
-		announce:
-			(GameOfLifeCellGotBorn new
-				cell: self;
-				yourself)"
+	announcer announce: self iGetBornAnnouncement
+]
+
+{ #category : 'as yet unclassified' }
+GameOfLifeCell >> iDieAnnouncement [
+
+	^ iDieAnnouncement
+]
+
+{ #category : 'as yet unclassified' }
+GameOfLifeCell >> iGetBornAnnouncement [
+
+	^ iGetBornAnnouncement
 ]
 
 { #category : 'acessing' }
-GameOfLifeCell >> initialize [ 
+GameOfLifeCell >> initialize [
+
 	super initialize.
-	self initializeGoLNeighbourTrait
+	self initializeGoLNeighbourTrait.
+	iGetBornAnnouncement := GameOfLifeCellGotBorn new
+		                        cell: self;
+		                        yourself.
+	iDieAnnouncement := GameOfLifeCellDies new
+		                    cell: self;
+		                    yourself
 ]
 
 { #category : 'testing' }

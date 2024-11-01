@@ -3,7 +3,9 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'rows',
-		'announcer'
+		'announcer',
+		'stepAnnouncement',
+		'stepFinishedAnnouncement'
 	],
 	#category : 'KataGameOfLife',
 	#package : 'KataGameOfLife'
@@ -81,11 +83,12 @@ GameOfLife >> addRowFromString: aString [
 { #category : 'initialize' }
 GameOfLife >> addRule: aGameOfLifeRule [
 
+	| ann |
 	aGameOfLifeRule applyRule: self.
+	ann := GoLNeighbourChangeAnnouncement new yourself.
 	self cellsDo: [ :aCell |
-		aCell announcer announce: (GoLNeighbourChangeAnnouncement new
-				 cell: aCell;
-				 yourself) ]
+		ann cell: aCell.
+		aCell announcer announce: ann ]
 ]
 
 { #category : 'acessing' }
@@ -136,10 +139,16 @@ GameOfLife >> downOf: aGameOfLifeCell [
 
 { #category : 'initialization' }
 GameOfLife >> initialize [
+
 	super initialize.
 	rows := OrderedCollection new.
-	announcer := Announcer new
-
+	announcer := Announcer new.
+	stepAnnouncement := GameOfLifeStepAnnouncement new
+		                    game: self;
+		                    yourself.
+	stepFinishedAnnouncement := GameOfLifeStepFinishAnnouncement new
+		                            game: self;
+		                            yourself
 ]
 
 { #category : 'accessign' }
@@ -221,8 +230,21 @@ GameOfLife >> rightUpOf: aGameOfLifeCell [
 
 { #category : 'processing' }
 GameOfLife >> step [
-	announcer announce: (GameOfLifeStepAnnouncement new game: self; yourself).
-	announcer announce: (GameOfLifeStepFinishAnnouncement new game: self; yourself).
+
+	announcer announce: self stepAnnouncement.
+	announcer announce: self stepFinishedAnnouncement
+]
+
+{ #category : 'processing' }
+GameOfLife >> stepAnnouncement [
+
+	^ stepAnnouncement
+]
+
+{ #category : 'processing' }
+GameOfLife >> stepFinishedAnnouncement [
+
+	^ stepFinishedAnnouncement
 ]
 
 { #category : 'accessing' }

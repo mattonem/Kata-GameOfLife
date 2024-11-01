@@ -14,30 +14,23 @@ Class {
 GBGoLCell >> cellFactory [
 
 	| ref poly |
+	poly := GBRectangle new
+		        color: '#9F9F9F';
+		        corner: 20 @ 20;
+		        yourself.
 	ref := GBDrawingReference new.
 	ref
-		addElement: (poly := GBPolygon new
-				         color: '#9F9F9F';
-				         points: {
-						         (0 @ 0).
-						         (0 @ 20).
-						         (20 @ 20).
-						         (20 @ 0) };
-				         yourself);
-		addElement: (GBMouseOverPolygon new points: poly points);
-		addElement: (GBMouseClickPolygon new points: poly points);
+		addElement: poly;
+		addElement: (GBMouseOverRectangle new corner: poly corner);
+		addElement: (GBMouseClickRectangle new corner: poly corner);
 		addElement: (statusLayer := GBNode new);
 		addElement: (overLayer := GBNode new);
 		addElement: (GBScript new
 				 on: GBMouseOverStarted;
 				 do: [
-					 (overLayer translation: 2 @ 2) addElement: (GBPolygon new
+					 (overLayer translation: 2 @ 2) addElement: (GBRectangle new
 								  color: '#FFFFCC';
-								  points: {
-										  (0 @ 0).
-										  (0 @ 16).
-										  (16 @ 16).
-										  (16 @ 0) };
+								  corner: 16 @ 16;
 								  yourself) ];
 				 yourself);
 		addElement: (GBScript new
@@ -53,6 +46,7 @@ GBGoLCell >> cellFactory [
 
 					 self updateStatus ];
 				 yourself).
+
 
 	^ ref
 ]
@@ -78,14 +72,11 @@ GBGoLCell >> model: aModel [
 
 { #category : 'adding' }
 GBGoLCell >> updateStatus [
+
 	statusLayer deleteAllChildren.
 	model isAlive ifTrue: [
-		statusLayer addElement: (GBPolygon new
+		statusLayer addElement: (GBRectangle new
 				 color: '#CCFF99';
-				 points: {
-						 (0 @ 0).
-						 (0 @ 20).
-						 (20 @ 20).
-						 (20 @ 0) };
+				 corner: 20 @ 20;
 				 yourself) ]
 ]

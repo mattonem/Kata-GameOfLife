@@ -16,7 +16,7 @@ GameOfLifeLiveOrDieRule >> applyRule: aBoard [
 				aBoard announcer unsubscribe: aCell.
 				aCell isAlive
 					ifTrue: [
-						(aCell aliveNeighbours = 2 or: aCell aliveNeighbours = 3)
+						(aCell aliveNeighbours = 2 or: [ aCell aliveNeighbours = 3 ])
 							ifFalse: [
 								aBoard announcer
 									when: GameOfLifeStepAnnouncement

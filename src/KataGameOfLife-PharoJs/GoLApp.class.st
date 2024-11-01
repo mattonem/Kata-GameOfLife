@@ -137,7 +137,6 @@ GoLApp >> sceneFactory [
 	orchestrator := GBOchestrator new
 		                sequence: {
 				                GBCalculate new.
-				                GBUpdate new.
 				                drawEvent };
 		                yourself.
 	clock := GBClock new.
@@ -156,7 +155,21 @@ GoLApp >> sceneFactory [
 			 onCanvas: (self componentNamed: #plotter);
 			 yourself).
 	self prepBoard.
-	node addElement: GBDebugger new.
+	node addElement: (GBScript new
+			 on: GBCalculate;
+			 do: [ model step ];
+			 yourself).
+	node addElement: (GBScript new
+			 on: GBMouseGlobalClick;
+			 do: [ model announcer announce: drawEvent ];
+			 yourself).
+	node addElement: (GBScript new
+			 on: GBMouseGlobalMove;
+			 do: [ node announcer announce: drawEvent ];
+			 yourself).
+	node announcer announce: drawEvent.
+	"	node addElement: GBDebugger new."
+	"	clock start."
 	^ node
 ]
 
@@ -165,8 +178,7 @@ GoLApp >> start [
 
 	super start.
 	self initializeComponentHolder.
-	model := GameOfLife col: 10 row: 10.
-	console log: model.
+	model := GameOfLife col: 30 row: 30.
 	(self componentNamed: #plotter) scene: self sceneFactory.
 	(document getElementById: #start)
 		addEventListener: #click
