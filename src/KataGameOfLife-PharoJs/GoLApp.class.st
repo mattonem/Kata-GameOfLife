@@ -51,7 +51,7 @@ GoLApp class >> generateHtmlUsing: html [
 						with: [
 							html heading
 								level: 1;
-								with: 'GameBox' ].
+								with: 'Conway''s Game of Life' ].
 					html div
 						class: 'card-body';
 						with: [
@@ -68,17 +68,7 @@ GoLApp class >> generateHtmlUsing: html [
 										value: 120;
 										class: 'form-range';
 										id: 'tps' ].
-							html div with: [
-								html label
-									for: 'timeFactor';
-									class: 'form-label';
-									with: 'TimeSpeed: '.
-								html inputRange
-									min: 1;
-									max: 1000;
-									value: 100;
-									class: 'form-range';
-									id: 'timeFactor' ].
+
 							html div
 								id: #start;
 								class: 'btn btn-primary';
@@ -175,11 +165,11 @@ GoLApp >> sceneFactory [
 
 { #category : 'initialize-release' }
 GoLApp >> start [
-
+	|scene|
 	super start.
 	self initializeComponentHolder.
 	model := GameOfLife col: 30 row: 30.
-	(self componentNamed: #plotter) scene: self sceneFactory.
+	(self componentNamed: #plotter) scene: (scene := self sceneFactory).
 	(document getElementById: #start)
 		addEventListener: #click
 		block: [ clock start ].
@@ -189,12 +179,7 @@ GoLApp >> start [
 	(document getElementById: #tps)
 		addEventListener: #input
 		block: [ clock requestedTps: (document getElementById: #tps) value ].
-	(document getElementById: #timeFactor)
-		addEventListener: #input
-		block: [
-			clock timeFactor:
-				(document getElementById: #timeFactor) value asInteger / 100 ].
 	(document getElementById: #step)
 		addEventListener: #click
-		block: [ model step ]
+		block: [ clock tick ]
 ]

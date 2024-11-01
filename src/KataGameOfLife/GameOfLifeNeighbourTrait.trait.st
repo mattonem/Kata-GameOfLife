@@ -17,6 +17,34 @@ GameOfLifeNeighbourTrait >> aliveNeighbours [
 ]
 
 { #category : 'initialization' }
+GameOfLifeNeighbourTrait >> findNeighbourOf: aCell in: inBoard [
+
+	| res |
+	res := OrderedCollection new.
+	{
+		(inBoard rightOf: aCell).
+		(inBoard rightUpOf: aCell).
+		(inBoard upOf: aCell).
+		(inBoard downOf: aCell).
+		(inBoard leftOf: aCell).
+		(inBoard rightUpOf: aCell).
+		(inBoard rightDownOf: aCell).
+		(inBoard leftUpOf: aCell).
+		(inBoard leftDownOf: aCell) } do: [ :anotherCell |
+		anotherCell ifNotNil: [ res add: anotherCell ] ].
+	^ res asSet
+]
+
+{ #category : 'initialization' }
+GameOfLifeNeighbourTrait >> initializeAliveCount [
+
+	nbAliveCount := 0.
+	neighbours do: [ :each |
+		each isAlive ifTrue: [ nbAliveCount := nbAliveCount + 1 ] ].
+	^ nbAliveCount
+]
+
+{ #category : 'initialization' }
 GameOfLifeNeighbourTrait >> initializeGoLNeighbourTrait [
 	self initializeGoLAnnouncerTrait.
 	neighbours := OrderedCollection new.
@@ -28,17 +56,8 @@ GameOfLifeNeighbourTrait >> initializeGoLNeighbourTrait [
 { #category : 'initialization' }
 GameOfLifeNeighbourTrait >> initializeOnCellGameOfLifeNeighbourTalent: aCell inBoard: inBoard [
 
-	neighbours addAll: ({
-			 (inBoard rightOf: aCell).
-			 (inBoard rightUpOf: aCell).
-			 (inBoard upOf: aCell).
-			 (inBoard downOf: aCell).
-			 (inBoard leftOf: aCell).
-			 (inBoard rightUpOf: aCell).
-			 (inBoard rightDownOf: aCell).
-			 (inBoard leftUpOf: aCell).
-			 (inBoard leftDownOf: aCell) } copyWithout: nil) asSet.
-	nbAliveCount := neighbours count: #isAlive.
+	neighbours := (self findNeighbourOf: aCell in: inBoard).
+	self initializeAliveCount.
 	neighbours do: [ :anotherCell |
 		anotherCell announcer
 			when: GameOfLifeCellGotBorn

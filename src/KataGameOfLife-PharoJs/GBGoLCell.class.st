@@ -74,9 +74,5 @@ GBGoLCell >> model: aModel [
 GBGoLCell >> updateStatus [
 
 	statusLayer deleteAllChildren.
-	model isAlive ifTrue: [
-		statusLayer addElement: (GBRectangle new
-				 color: '#CCFF99';
-				 corner: 20 @ 20;
-				 yourself) ]
+	model isAlive ifTrue: [ statusLayer addElement: aliveShape ]
 ]
