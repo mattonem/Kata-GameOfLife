@@ -10,8 +10,9 @@ GameOfLifeLiveOrDieRule >> applyRule: aBoard [
 
 	aBoard cellsDo: [ :aCell |
 		aCell announcer
-			when: GoLNeighbourChangeAnnouncement , GameOfLifeCellDies
-				, GameOfLifeCellGotBorn
+			when: (AnnouncementSet new addAll:
+					 GoLNeighbourChangeAnnouncement , GameOfLifeCellDies
+					 , GameOfLifeCellGotBorn)
 			do: [
 				aBoard announcer unsubscribe: aCell.
 				aCell isAlive
