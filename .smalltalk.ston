@@ -7,6 +7,9 @@ SmalltalkCISpec {
       #load: [ 'tests' ]
     }
   ],
+  #postLoading : [
+    'scripts/exportApp.st'
+  ],
   #testing : {
     #coverage : {
       #categories : [ 'KataGameOfLife', 'KataGameOfLife-*' ]
