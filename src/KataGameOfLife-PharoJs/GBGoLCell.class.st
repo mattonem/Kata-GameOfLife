@@ -1,6 +1,6 @@
 Class {
 	#name : 'GBGoLCell',
-	#superclass : 'GBNode',
+	#superclass : 'GBPartialDrawing',
 	#instVars : [
 		'model',
 		'statusLayer',
@@ -41,11 +41,15 @@ GBGoLCell >> cellFactory [
 		addElement: overLayer;
 		addElement: (GBScript new
 				 on: GBMouseOverStarted;
-				 do: [ overLayer addElement: overShape ];
+				 do: [
+					 overLayer addElement: overShape.
+					 self needsUpdate ];
 				 yourself);
 		addElement: (GBScript new
 				 on: GBMouseOverEnded;
-				 do: [ overLayer deleteAllChildren ];
+				 do: [
+					 overLayer deleteAllChildren.
+					 self needsUpdate ];
 				 yourself);
 		addElement: (GBScript new
 				 on: GBMouseElementClicked;
@@ -83,5 +87,6 @@ GBGoLCell >> model: aModel [
 GBGoLCell >> updateStatus [
 
 	statusLayer deleteAllChildren.
-	model isAlive ifTrue: [ statusLayer addElement: aliveShape  ]
+	model isAlive ifTrue: [ statusLayer addElement: aliveShape  ].
+	self needsUpdate.
 ]

@@ -137,7 +137,7 @@ GoLApp >> sceneFactory [
 			              yourself).
 	node addElement: clock.
 	node addElement: orchestrator.
-	node addElement: GBDrawSequencer new.
+	node addElement: GBNoClearDrawSequencer new.
 	node addElement: (GBCaptureMouseClick new
 			 onCanvas: (self componentNamed: #plotter);
 			 yourself).
@@ -158,8 +158,6 @@ GoLApp >> sceneFactory [
 			 do: [ node announcer announce: drawEvent ];
 			 yourself).
 	node announcer announce: drawEvent.
-	"	node addElement: GBDebugger new."
-	"	clock start."
 	^ node
 ]
 
