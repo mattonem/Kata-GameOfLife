@@ -152,7 +152,9 @@ GoLApp >> sceneFactory [
 				                drawEvent };
 		                yourself.
 	clock := GBClock new.
-	clock requestedTps: 60.
+	clock
+		requestedTps: 60;
+		waitUntilIsFinished: orchestrator.
 	root := GBNode new.
 	root addElement: (reference := GBDrawingTranslation new
 			              position: 0 @ 0;
