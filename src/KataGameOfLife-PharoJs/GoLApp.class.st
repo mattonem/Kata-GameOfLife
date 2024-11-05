@@ -6,7 +6,8 @@ Class {
 	#instVars : [
 		'clock',
 		'reference',
-		'model'
+		'model',
+		'root'
 	],
 	#classInstVars : [
 		'staticComponents'
@@ -95,12 +96,33 @@ GoLApp class >> updateHtmlRoot: root [
 { #category : 'as yet unclassified' }
 GoLApp >> prepBoard [
 
-	reference deleteAllChildren.
+	| manager tempNode tasks loading drawEvent |
+	manager := GBTaskSequenceManager new.
+	tempNode := GBNode new.
+	tasks := OrderedCollection new.
+	drawEvent := GBDrawSequenceStart new
+		             context: (self componentNamed: #plotter) context;
+		             yourself.
 	model cellsDoWithPositon: [ :aCell :position |
-		(reference translation: 20 @ 20 * position) addElement:
-			(GBGoLCell new
-				 model: aCell;
-				 yourself) ]
+		tasks add: [
+			(tempNode translation: 20 @ 20 * position) addElement:
+				(GBGoLCell new
+					 model: aCell;
+					 yourself) ] ].
+	(reference translation: 500 @ 500) addElement:
+		(loading := GBLoadingBar new
+			            max: tasks size;
+			            yourself).
+	manager
+		sequence: tasks;
+		inBetweenDo: [
+			loading progressInc.
+			root announcer announce: drawEvent ];
+		onFinishDo: [
+			reference deleteAllChildren.
+			reference addElement: tempNode.
+			root announcer announce: drawEvent ];
+		do
 ]
 
 { #category : 'as yet unclassified' }
@@ -119,7 +141,7 @@ GoLApp >> randomColor [
 { #category : 'as yet unclassified' }
 GoLApp >> sceneFactory [
 
-	| node orchestrator drawEvent |
+	| orchestrator drawEvent |
 	drawEvent := GBDrawSequenceStart new
 		             context: (self componentNamed: #plotter) context;
 		             yourself.
@@ -131,34 +153,34 @@ GoLApp >> sceneFactory [
 		                yourself.
 	clock := GBClock new.
 	clock requestedTps: 60.
-	node := GBNode new.
-	node addElement: (reference := GBDrawingTranslation new
+	root := GBNode new.
+	root addElement: (reference := GBDrawingTranslation new
 			              position: 0 @ 0;
 			              yourself).
-	node addElement: clock.
-	node addElement: orchestrator.
-	node addElement: GBNoClearDrawSequencer new.
-	node addElement: (GBCaptureMouseClick new
+	root addElement: clock.
+	root addElement: orchestrator.
+	root addElement: GBFullDrawSequencer new.
+	root addElement: (GBCaptureMouseClick new
 			 onCanvas: (self componentNamed: #plotter);
 			 yourself).
-	node addElement: (GBCaptureMouseMove new
+	root addElement: (GBCaptureMouseMove new
 			 onCanvas: (self componentNamed: #plotter);
 			 yourself).
 	self prepBoard.
-	node addElement: (GBScript new
+	root addElement: (GBScript new
 			 on: GBCalculate;
 			 do: [ model step ];
 			 yourself).
-	node addElement: (GBScript new
+	root addElement: (GBScript new
 			 on: GBMouseGlobalClick;
-			 do: [ model announcer announce: drawEvent ];
+			 do: [ root announcer announce: drawEvent ];
 			 yourself).
-	node addElement: (GBScript new
+	root addElement: (GBScript new
 			 on: GBMouseGlobalMove;
-			 do: [ node announcer announce: drawEvent ];
+			 do: [ root announcer announce: drawEvent ];
 			 yourself).
-	node announcer announce: drawEvent.
-	^ node
+	root announcer announce: drawEvent.
+	^ root
 ]
 
 { #category : 'initialize-release' }
