@@ -100,7 +100,7 @@ GoLApp >> prepBoard [
 	manager := GBTaskSequenceManager new.
 	tempNode := GBNode new.
 	tasks := OrderedCollection new.
-	drawEvent := GBDrawSequenceStart new
+	drawEvent := GBDrawFullClearSequenceStart new
 		             context: (self componentNamed: #plotter) context;
 		             yourself.
 	model cellsDoWithPositon: [ :aCell :position |
@@ -142,7 +142,7 @@ GoLApp >> randomColor [
 GoLApp >> sceneFactory [
 
 	| orchestrator drawEvent |
-	drawEvent := GBDrawSequenceStart new
+	drawEvent := GBDrawNoClearSequenceStart new
 		             context: (self componentNamed: #plotter) context;
 		             yourself.
 
@@ -159,7 +159,8 @@ GoLApp >> sceneFactory [
 			              yourself).
 	root addElement: clock.
 	root addElement: orchestrator.
-	root addElement: GBFullDrawSequencer new.
+	root addElement:
+		(GBDrawSequencer new drawingEvent: GBDrawingNowPartial new yourself).
 	root addElement: (GBCaptureMouseClick new
 			 onCanvas: (self componentNamed: #plotter);
 			 yourself).
@@ -185,7 +186,8 @@ GoLApp >> sceneFactory [
 
 { #category : 'initialize-release' }
 GoLApp >> start [
-	|scene|
+
+	| scene |
 	super start.
 	self initializeComponentHolder.
 	model := GameOfLife col: 30 row: 30.
