@@ -16,12 +16,11 @@ GameOfLifeLiveOrDieRule >> applyRule: aBoard [
 				aBoard announcer unsubscribe: aCell.
 				aCell isAlive
 					ifTrue: [
-						(aCell aliveNeighbours = 2 or: [ aCell aliveNeighbours = 3 ])
-							ifFalse: [
-								aBoard announcer
-									when: GameOfLifeStepAnnouncement
-									do: [ aCell die ]
-									for: aCell ] ]
+						({ 2. 3 } includes: aCell aliveNeighbours) ifFalse: [
+							aBoard announcer
+								when: GameOfLifeStepAnnouncement
+								do: [ aCell die ]
+								for: aCell ] ]
 					ifFalse: [
 						aCell aliveNeighbours = 3 ifTrue: [
 							aBoard announcer
