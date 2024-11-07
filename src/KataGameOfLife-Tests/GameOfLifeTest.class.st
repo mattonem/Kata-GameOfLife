@@ -9,6 +9,17 @@ Class {
 }
 
 { #category : 'tests' }
+GameOfLifeTest >> testHeight [
+
+	| gameOfLife |
+	gameOfLife := GameOfLife newFromString: '
+	|0|1|0|
+	|0|1|0|
+	'.
+	self assert: gameOfLife height equals: 2
+]
+
+{ #category : 'tests' }
 GameOfLifeTest >> testInitialize [
 	| gameOfLife |
 	gameOfLife := GameOfLife
@@ -86,4 +97,15 @@ GameOfLifeTest >> testStepEasy [
 	self assert: gameOfLife nbColumns equals: 1.
 	self assert: gameOfLife nbCells equals: 1.
 	self assert: gameOfLife asString trim equals: '|0|'
+]
+
+{ #category : 'tests' }
+GameOfLifeTest >> testWidth [
+
+	| gameOfLife |
+	gameOfLife := GameOfLife newFromString: '
+	|0|1|0|
+	|0|1|0|
+	'.
+	self assert: gameOfLife width equals: 3
 ]

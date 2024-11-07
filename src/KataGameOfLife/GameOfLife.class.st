@@ -137,6 +137,11 @@ GameOfLife >> downOf: aGameOfLifeCell [
 	^ self cellAt: (self positionOf: aGameOfLifeCell) + (1 @ 0)
 ]
 
+{ #category : 'accessing' }
+GameOfLife >> height [
+	^ rows size
+]
+
 { #category : 'initialization' }
 GameOfLife >> initialize [
 
@@ -251,4 +256,9 @@ GameOfLife >> stepFinishedAnnouncement [
 GameOfLife >> upOf: aGameOfLifeCell [
 
 	^ self cellAt: (self positionOf: aGameOfLifeCell) + (-1 @ 0)
+]
+
+{ #category : 'accessing' }
+GameOfLife >> width [
+	^ rows first nbCells
 ]

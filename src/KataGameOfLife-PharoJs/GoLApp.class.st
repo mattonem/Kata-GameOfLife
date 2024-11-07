@@ -98,7 +98,9 @@ GoLApp >> prepBoard [
 
 	| manager tempNode tasks loading drawEvent |
 	manager := GBTaskSequenceManager new.
-	tempNode := GBNode new.
+	tempNode := GBDrawingTranslation new
+		            position: -20 @ -20 * (model height @ model width) / 2;
+		            yourself.
 	tasks := OrderedCollection new.
 	drawEvent := GBDrawFullClearSequenceStart new
 		             context: (self componentNamed: #plotter) context;
@@ -109,7 +111,7 @@ GoLApp >> prepBoard [
 				(GBGoLCell new
 					 model: aCell;
 					 yourself) ] ].
-	(reference translation: 500 @ 500) addElement:
+	(reference translation: 0 @ 0) addElement:
 		(loading := GBLoadingBar new
 			            max: tasks size;
 			            yourself).
@@ -157,7 +159,7 @@ GoLApp >> sceneFactory [
 		waitUntilIsFinished: orchestrator.
 	root := GBNode new.
 	root addElement: (reference := GBDrawingTranslation new
-			              position: 0 @ 0;
+			              position: 500 @ 500;
 			              yourself).
 	root addElement: clock.
 	root addElement: orchestrator.
