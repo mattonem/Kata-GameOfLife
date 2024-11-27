@@ -23,6 +23,7 @@ GameOfLife class >> col: col row: row [
 { #category : 'instance creation' }
 GameOfLife class >> launcher [
 <script>
+<ignoreForCoverage>
 ^( self newFromString: 
 '|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
 |0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|

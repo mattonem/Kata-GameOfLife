@@ -9,6 +9,22 @@ Class {
 }
 
 { #category : 'tests' }
+GameOfLifeTest >> testCellsDoWithPositon [
+
+	| gameOfLife sumOfPositions |
+	gameOfLife := GameOfLife col: 3 row: 3.
+	sumOfPositions := 0 @ 0.
+	gameOfLife cellsDoWithPositon: [ :aCell :position |
+		aCell getBorn.
+		sumOfPositions := sumOfPositions + position ].
+	self assert: sumOfPositions equals: 18 @ 18.
+	self assert: gameOfLife asString trim equals: '
+|1|1|1|
+|1|1|1|
+|1|1|1|' trim
+]
+
+{ #category : 'tests' }
 GameOfLifeTest >> testHeight [
 
 	| gameOfLife |
@@ -21,10 +37,9 @@ GameOfLifeTest >> testHeight [
 
 { #category : 'tests' }
 GameOfLifeTest >> testInitialize [
+
 	| gameOfLife |
-	gameOfLife := GameOfLife
-		newFromString:
-			'
+	gameOfLife := GameOfLife newFromString: '
 	|1|1|1|
 	|1|1|1|
 	|1|1|1|
@@ -32,13 +47,18 @@ GameOfLifeTest >> testInitialize [
 	self assert: gameOfLife nbRows equals: 3.
 	self assert: gameOfLife nbColumns equals: 3.
 	self assert: gameOfLife nbCells equals: 9.
-	self
-		assert: gameOfLife asString trim
-		equals:
-			'
+	self assert: gameOfLife asString trim equals: '
 |1|1|1|
 |1|1|1|
 |1|1|1|' trim.
+	gameOfLife := GameOfLife col: 3 row: 3.
+	self assert: gameOfLife nbRows equals: 3.
+	self assert: gameOfLife nbColumns equals: 3.
+	self assert: gameOfLife nbCells equals: 9.
+	self assert: gameOfLife asString trim equals: '
+|0|0|0|
+|0|0|0|
+|0|0|0|' trim
 ]
 
 { #category : 'tests' }
